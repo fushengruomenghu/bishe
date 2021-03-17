@@ -36,7 +36,7 @@ class BisheApplicationTests {
     }
     @Test
     void insert() {
-        Users users=new Users("1","1","1","1","1");
+//        Users users=new Users("1","1","1","1","1");
 //        userDao.save(users);
 //        userServiceImpls.InsertUser(users);
         findALL();

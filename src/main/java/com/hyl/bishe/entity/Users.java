@@ -10,31 +10,41 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
     @Column
-
     String username;
     @Column
-
-    String password;
-    @Column
-
     String sex;
     @Column
-
-    String email;
-
-    @Column
     String phone;
-
-    public Users(String username, String password, String sex, String email, String phone) {
-        this.username = username;
-        this.password = password;
-        this.sex = sex;
-        this.email = email;
-        this.phone = phone;
-    }
+    @Column
+    String location;
+    @Column
+    String grade;
+    @Column
+    String leibie;
+    @Column
+    String pici;
 
     public Users() {
 
+    }
+
+    public Users(Integer id, String username, String sex, String phone, String location, String grade, String leibie, String pici) {
+        this.id = id;
+        this.username = username;
+        this.sex = sex;
+        this.phone = phone;
+        this.location = location;
+        this.grade = grade;
+        this.leibie = leibie;
+        this.pici = pici;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -45,30 +55,12 @@ public class Users {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-
-
     public String getSex() {
         return sex;
     }
 
     public void setSex(String sex) {
         this.sex = sex;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getPhone() {
@@ -79,15 +71,35 @@ public class Users {
         this.phone = phone;
     }
 
-    @Override
-    public String toString() {
-        return "Users{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
+    public String getLocation() {
+        return location;
+    }
 
-                ", sex='" + sex + '\'' +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                '}';
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    public String getLeibie() {
+        return leibie;
+    }
+
+    public void setLeibie(String leibie) {
+        this.leibie = leibie;
+    }
+
+    public String getPici() {
+        return pici;
+    }
+
+    public void setPici(String pici) {
+        this.pici = pici;
     }
 }
