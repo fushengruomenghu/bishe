@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface UsersController {
 
-    String showUsersList();
+    String showUsersInfo();
 }

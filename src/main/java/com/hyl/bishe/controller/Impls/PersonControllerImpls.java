@@ -14,6 +14,7 @@ import org.springframework.web.context.request.WebRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -53,6 +54,9 @@ public class PersonControllerImpls implements PersonController {
                 person1.setPhone(phone);
                 person1.setPassword(password1);
                 personServiceImpls.InsertPerson(person1);
+                Users user=new Users();
+                user.setPhone(person1.getPhone());
+                usersService.sava(user);
                 System.out.println("注册成功");
                 return "login";
             } else {
@@ -71,17 +75,16 @@ public class PersonControllerImpls implements PersonController {
         return "login";
     }
     @RequestMapping("/doLogin")
-    public String doLogin(HttpServletRequest request, Model model){
+    public String doLogin(HttpServletRequest request, HttpSession session){
         String phone = request.getParameter("phone");
         String password = request.getParameter("password");
         System.out.println(phone+"+++++++++++++++"+password);
         Person person=personServiceImpls.findByPhoneAndPassword(phone,password);
-
         if (person != null) {
             Users users=usersService.findUserByPhone(person.getPhone());
-            model.addAttribute("Users",users);
+            session.setAttribute("Users",users);
             System.out.println("登陆成功");
-            return "schoolInfo";
+            return "redirect:/schoolInfo";
         }else {
             System.out.println("用户名或密码错误");
             return "login";

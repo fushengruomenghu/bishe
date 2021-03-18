@@ -1,13 +1,14 @@
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link th:href="@{css/bootstrap.min.css}" type="text/css" rel="stylesheet">
     <link th:href="@{css/font-awesome.min.css}" type="text/javascript" rel="stylesheet">
     <link th:href="@{css/bootsnav.css}" type="text/css" rel="stylesheet">
     <link th:href="@{css/normalize.css}" type="text/css" rel="stylesheet">
     <link th:href="@{css/css.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{css/head.css}" type="text/css" rel="stylesheet"/>
+<!--    <link th:href="@{css/index.css}" rel="stylesheet" type="text/css" >-->
     <script th:src="@{js/jquery-1.11.0.min.js}" type="text/javascript"></script>
     <script th:src="@{js/bootstrap.min.js}" type="text/javascript"></script>
     <script th:src="@{js/bootsnav.js}" type="text/javascript"></script>
@@ -16,8 +17,9 @@
 </head>
 
 <body>
-
-
+        <div class="header-main">
+            <div id="head" th:include="public/head :: common_head"></div>
+        </div>
         <table align="center">
                 <tr>
                     <th>序号</th>
@@ -41,13 +43,13 @@
                     <td th:text="${school.belonged}">教育行政主管部门</td>
                     <td th:text="${school.type}">院校类型</td>
                     <td th:text="${school.education_level}">学历层次</td>
-                    <td th:text="${school.yiliudaxue}">一流大学建设高校</td>
-                    <td th:text="${school.yiliuxueke}">一流学科建设高校</td>
-                    <td th:text="${school.graduate_school}">研究生院</td>
+                    <td th:text="${school.yiliudaxue.equals('1') ?'是':'否'}">一流大学建设高校</td>
+                    <td th:text="${school.yiliuxueke.equals('1') ?'是':'否'}">一流学科建设高校</td>
+                    <td th:text="${school.graduate_school.equals('1') ?'有':'无'}">研究生院</td>
                     <td th:text="${school.comprehensive}">综合满意度</td>
                     <td th:text="${school.environment}">院校环境满意度</td>
                     <td th:text="${school.life}">生活满意度</td>
-                    <td ><input type="submit"  value="详情"/></td>
+                    <td ><input type="submit" th:onsubmit="" value="详情"/></td>
                 </tr>
                 <tr>
                     <td colspan="8">
@@ -62,5 +64,11 @@
                     </td>
                 </tr>
         </table>
+<script>
+    $(document).ready(function() {
+        $("th").attr("align","center")
+        $("td").attr("align","left")
+    });
+</script>
 </body>
 </html>

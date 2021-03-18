@@ -32,4 +32,8 @@ public class UsersServiceImpl implements UsersService {
     public Users findUserByPhone(String phone){
         return usersDao.findAllByPhone(phone);
     }
+    public void sava(Users user){
+        usersDao.save(user);
+    }
+
 }
