@@ -3,16 +3,24 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{css/bootstrap.min.css}" type="text/css" rel="stylesheet">
+    <link th:href="@{css/font-awesome.min.css}" type="text/javascript" rel="stylesheet">
+    <link th:href="@{css/bootsnav.css}" type="text/css" rel="stylesheet">
+    <link th:href="@{css/normalize.css}" type="text/css" rel="stylesheet">
+    <link th:href="@{css/css.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{js/jquery-1.11.0.min.js}" type="text/javascript"></script>
+    <script th:src="@{js/bootstrap.min.js}" type="text/javascript"></script>
+    <script th:src="@{js/bootsnav.js}" type="text/javascript"></script>
+    <script th:src="@{js/jquery.js}" type="text/javascript"></script>
     <title>学校信息</title>
 </head>
 
-<body class="logobg_style">
-<div id="large-header" class="large-header login-page">
-    <canvas id="demo-canvas" width="1590" height="711"></canvas>
-    <div class="login-form">
-        <table>
-            <thead>
+<body>
+
+
+        <table align="center">
                 <tr>
+                    <th>序号</th>
                     <th>院校名称</th>
                     <th>院校所在地</th>
                     <th>教育行政主管部门</th>
@@ -24,26 +32,35 @@
                     <th>综合满意度</th>
                     <th>院校环境满意度</th>
                     <th>生活满意度</th>
+                    <th></th>
                 </tr>
-            </thead>
-            <tbody>
-                <tr th:each="schoolInfo : ${schoolInfos}">
-                    <td th:text="${schoolInfoStat.index+1}">序号</td>
-                    <td th:text="${schoolInfo.schname}">院校名称</td>
-                    <td th:text="${schoolInfo.location}">院校所在地</td>
-                    <td th:text="${schoolInfo.belonged}">教育行政主管部门</td>
-                    <td th:text="${schoolInfo.type}">院校类型</td>
-                    <td th:text="${schoolInfo.education_level}">学历层次</td>
-                    <td th:text="${schoolInfo.yiliudaxue}">一流大学建设高校</td>
-                    <td th:text="${schoolInfo.yiliuxueke}">一流学科建设高校</td>
-                    <td th:text="${schoolInfo.graduate_school}">研究生院</td>
-                    <td th:text="${schoolInfo.comprehensive}">综合满意度</td>
-                    <td th:text="${schoolInfo.environment}">院校环境满意度</td>
-                    <td th:text="${schoolInfo.life}">生活满意度</td>
+                <tr th:each="school : ${schoolInfos}">
+                    <td th:text="${schoolStat.index+1}">序号</td>
+                    <td ><a th:text="${school.schname}" ></a></td>
+                    <td th:text="${school.location}">院校所在地</td>
+                    <td th:text="${school.belonged}">教育行政主管部门</td>
+                    <td th:text="${school.type}">院校类型</td>
+                    <td th:text="${school.education_level}">学历层次</td>
+                    <td th:text="${school.yiliudaxue}">一流大学建设高校</td>
+                    <td th:text="${school.yiliuxueke}">一流学科建设高校</td>
+                    <td th:text="${school.graduate_school}">研究生院</td>
+                    <td th:text="${school.comprehensive}">综合满意度</td>
+                    <td th:text="${school.environment}">院校环境满意度</td>
+                    <td th:text="${school.life}">生活满意度</td>
+                    <td ><input type="submit"  value="详情"/></td>
                 </tr>
-            </tbody>
+                <tr>
+                    <td colspan="8">
+                        <div class="pagelist">
+                            <p>当前<span th:text="${schoolInfos.getNumber()} + 1"></span>页,总<span th:text="${schoolInfos.totalPages}"></span>页
+                                　　　　　　　　　　　　　　　　　共<span th:text="${schoolInfos.totalElements}"></span>条记录
+                                <a th:href="@{/schoolInfo}">首页</a>
+                                <a th:href="@{/schoolInfo(pageNum = ${schoolInfos.hasPrevious()} ? ${schoolInfos.getNumber() } : 1)}">上一页</a>
+                                <a th:href="@{/schoolInfo(pageNum = ${schoolInfos.hasNext()} ? ${schoolInfos.getNumber()} + 2 : ${schoolInfos.totalPages})}">下一页</a>
+                                <a th:href="@{/schoolInfo(pageNum = ${schoolInfos.totalPages})}">尾页</a></p>
+                        </div>
+                    </td>
+                </tr>
         </table>
-    </div>
-</div>
 </body>
 </html>

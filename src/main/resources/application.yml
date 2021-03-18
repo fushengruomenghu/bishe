@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://rm-uf6la91ia66461hdzxo.mysql.rds.aliyuncs.com:3306/bishe?createDatabaseIfNotExist=true&serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://rm-uf6la91ia66461hdzxo.mysql.rds.aliyuncs.com:3306/bishe?createDatabaseIfNotExist=true&serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: hyl
     password: huyulong1999@
     driver-class-name: com.mysql.jdbc.Driver

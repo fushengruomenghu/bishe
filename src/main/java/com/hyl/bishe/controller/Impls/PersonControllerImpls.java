@@ -2,9 +2,12 @@ package com.hyl.bishe.controller.Impls;
 
 import com.hyl.bishe.controller.PersonController;
 import com.hyl.bishe.entity.Person;
+import com.hyl.bishe.entity.Users;
 import com.hyl.bishe.service.impls.PersonServiceImpls;
+import com.hyl.bishe.service.impls.UsersServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.WebRequest;
 
@@ -19,6 +22,9 @@ public class PersonControllerImpls implements PersonController {
 
     @Autowired
     private PersonServiceImpls personServiceImpls;
+    @Autowired
+    private UsersServiceImpl usersService;
+
 
     @Override
     @RequestMapping("/register")
@@ -65,15 +71,17 @@ public class PersonControllerImpls implements PersonController {
         return "login";
     }
     @RequestMapping("/doLogin")
-    public String doLogin(HttpServletRequest request){
+    public String doLogin(HttpServletRequest request, Model model){
         String phone = request.getParameter("phone");
         String password = request.getParameter("password");
         System.out.println(phone+"+++++++++++++++"+password);
         Person person=personServiceImpls.findByPhoneAndPassword(phone,password);
 
         if (person != null) {
+            Users users=usersService.findUserByPhone(person.getPhone());
+            model.addAttribute("Users",users);
             System.out.println("登陆成功");
-            return "list";
+            return "schoolInfo";
         }else {
             System.out.println("用户名或密码错误");
             return "login";

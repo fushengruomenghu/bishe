@@ -22,12 +22,14 @@ public class UsersServiceImpl implements UsersService {
 
         Pageable pageable = PageRequest.of(pageNum, pageSize, Sort.by(Sort.Direction.DESC,"id"));
         Page<Users> users = usersDao.findAll(pageable);
-
         return users;
     }
 
     @Override
     public List<Users> findAllUsers() {
         return usersDao.findAll();
+    }
+    public Users findUserByPhone(String phone){
+        return usersDao.findAllByPhone(phone);
     }
 }

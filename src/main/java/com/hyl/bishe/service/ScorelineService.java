@@ -1,10 +1,10 @@
 package com.hyl.bishe.service;
 
 import com.hyl.bishe.entity.SchoolInfo;
-import com.hyl.bishe.entity.Users;
+import com.hyl.bishe.entity.Scoreline;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface SchoolInfoService {
-    Page<SchoolInfo> findAll(Pageable Page);
+public interface ScorelineService {
+    Page<Scoreline> findAll(Pageable page);
 }

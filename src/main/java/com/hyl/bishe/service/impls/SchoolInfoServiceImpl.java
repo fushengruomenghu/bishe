@@ -2,7 +2,6 @@ package com.hyl.bishe.service.impls;
 
 import com.hyl.bishe.dao.SchoolInfoDao;
 import com.hyl.bishe.entity.SchoolInfo;
-import com.hyl.bishe.entity.Users;
 import com.hyl.bishe.service.SchoolInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,16 +17,12 @@ public class SchoolInfoServiceImpl implements SchoolInfoService {
     @Autowired
     private SchoolInfoDao schoolInfoDao;
 
-    public List<SchoolInfo> findAllSchoolInfo(){
-        return schoolInfoDao.findAll();
+    public SchoolInfo findAllbyId(Integer id){
+        return schoolInfoDao.findAllById(id);
     }
 
-
-
     @Override
-    public Page<SchoolInfo> getSchoolInfoList(int pageNum, int pageSize) {
-        Pageable pageable = PageRequest.of(pageNum, pageSize, Sort.by(Sort.Direction.DESC,"id"));
-        Page<SchoolInfo> schoolInfos = schoolInfoDao.findAll(pageable);
-        return schoolInfos;
+    public Page<SchoolInfo> findAll(Pageable Page) {
+        return schoolInfoDao.findAll(Page);
     }
 }

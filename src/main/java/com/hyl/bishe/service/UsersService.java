@@ -8,4 +8,5 @@ import java.util.List;
 public interface UsersService {
     Page<Users> getUserList(int pageNum, int pageSize);
     List<Users> findAllUsers();
+
 }

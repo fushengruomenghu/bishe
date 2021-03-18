@@ -1,10 +1,10 @@
 package com.hyl.bishe.controller.Impls;
 
-import com.hyl.bishe.controller.SchoolInfoController;
-import com.hyl.bishe.dao.SchoolInfoDao;
+import com.hyl.bishe.controller.ScorelineController;
 import com.hyl.bishe.entity.SchoolInfo;
-import com.hyl.bishe.entity.Users;
+import com.hyl.bishe.entity.Scoreline;
 import com.hyl.bishe.service.impls.SchoolInfoServiceImpl;
+import com.hyl.bishe.service.impls.ScorelineServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,29 +15,28 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
-public class SchoolInfoControllerImpl implements SchoolInfoController {
+public class ScorelineControllerImpl implements ScorelineController {
     static Logger logger = LoggerFactory.getLogger(SchoolInfoServiceImpl.class);
-    @Autowired
-    private SchoolInfoServiceImpl schoolInfoService;
 
-    @RequestMapping("/schoolInfo")
-    public String ListSchool(HttpServletResponse response, Model model,Integer pageNum){
+    @Autowired
+    private ScorelineServiceImpl scorelineService;
+
+    @RequestMapping("/scoreline")
+    public String ListSchool(HttpServletResponse response, Model model, Integer pageNum){
         if (pageNum == null) {
             pageNum=1;
         }
-        Sort sort=Sort.by(Sort.Direction.ASC,"id");
-        Pageable pageable=PageRequest.of(pageNum-1,25,sort);
-        Page<SchoolInfo> list = schoolInfoService.findAll(pageable);
+        Sort sort=Sort.by(Sort.Direction.DESC,"year");
+        Pageable pageable= PageRequest.of(pageNum-1,25,sort);
+        Page<Scoreline> list = scorelineService.findAll(pageable);
 
         logger.info("pageNum==" + pageNum);
-        model.addAttribute("schoolInfos",list);
+        model.addAttribute("score_line",list);
         response.addHeader("x-frame-options","SAMEORIGIN");
-        return "schoolInfo";
+        return "score_line";
     }
-
 }

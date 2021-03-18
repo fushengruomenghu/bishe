@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{css/bootstrap.min.css}" type="text/css" rel="stylesheet">
+    <link th:href="@{css/font-awesome.min.css}" type="text/javascript" rel="stylesheet"><!--    图标-->
+    <link th:href="@{css/bootsnav.css}" type="text/css" rel="stylesheet">
+    <link th:href="@{css/normalize.css}" type="text/css" rel="stylesheet">
+    <link th:href="@{css/css.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{js/jquery-1.11.0.min.js}" type="text/javascript"></script>
+    <script th:src="@{js/bootstrap.min.js}" type="text/javascript"></script>
+    <script th:src="@{js/bootsnav.js}" type="text/javascript"></script>
+    <script th:src="@{js/jquery.js}" type="text/javascript"></script>
+    <title>分数线</title>
+</head>
+<body>
+<table align="center">
+    <tr>
+        <th>序号</th>
+        <th>地区</th>
+        <th>年份</th>
+        <th>考生类别</th>
+        <th>批次</th>
+        <th>分数线</th>
+    </tr>
+    <tr th:each="score : ${score_line}">
+        <td th:text="${scoreStat.index+1}"></td>
+        <td th:text="${score.location}"></td>
+        <td th:text="${score.year}"></td>
+        <td th:text="${score.leibie}"></td>
+        <td th:text="${score.pici}"></td>
+        <td th:text="${score.score}"></td>
+    </tr>
+    <tr>
+        <td colspan="8">
+            <div class="pagelist">
+                <p>当前<span th:text="${score_line.getNumber()} + 1"></span>页,总<span th:text="${score_line.totalPages}"></span>页
+                    　　　　　　　　　　　　　　　　　共<span th:text="${score_line.totalElements}"></span>条记录
+                    <a th:href="@{/scoreline}">首页</a>
+                    <a th:href="@{/scoreline(pageNum = ${score_line.hasPrevious()} ? ${score_line.getNumber() } : 1)}">上一页</a>
+                    <a th:href="@{/scoreline(pageNum = ${score_line.hasNext()} ? ${score_line.getNumber()} + 2 : ${score_line.totalPages})}">下一页</a>
+                    <a th:href="@{/scoreline(pageNum = ${score_line.totalPages})}">尾页</a></p>
+            </div>
+        </td>
+    </tr>
+</table>
+<script>
+    $(document).ready(function() {
+        $("td").attr("align","center")
+    });
+</script>
+</body>
+</html>
