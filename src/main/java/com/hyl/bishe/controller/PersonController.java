@@ -7,4 +7,5 @@ public interface PersonController {
     String register();
     String login();
     String forgetPassword();
+
 }

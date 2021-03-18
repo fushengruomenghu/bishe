@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+    <table>
+        <thead>
+        <tr>
+            <th>username</th>
+            <th>password</th>
+        </tr>
+        </thead>
 
+        <tbody>
+            <tr th:each="person :${personList}">
+                <td th:text="${person.phone}">phone</td>
+                <td th:text="${person.password}">password</td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>

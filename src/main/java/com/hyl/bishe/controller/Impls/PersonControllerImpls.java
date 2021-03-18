@@ -6,9 +6,13 @@ import com.hyl.bishe.service.impls.PersonServiceImpls;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.request.WebRequest;
 
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class PersonControllerImpls implements PersonController {
@@ -55,54 +59,11 @@ public class PersonControllerImpls implements PersonController {
         }
     }
 
-
-
-
-//    @RequestMapping("/doRegister")
-//    public String doRegister(HttpServletRequest request) {
-//        String username = request.getParameter("username");
-//        String password1 = request.getParameter("password1");
-//        String password2 = request.getParameter("password1");
-//        String sex = request.getParameter("sex");
-//        String phone = request.getParameter("phone");
-//        String email = request.getParameter("email");
-//
-//
-//        List<Users> usersList = userServiceImpls.findAllUser();
-//
-//        Boolean flag = false;
-//
-//        for (Users users : usersList) {
-//            if (users.getUsername().equals(username)) {
-//                flag = false;
-//            } else {
-//                flag = true;
-//            }
-//        }
-//        if (flag) {
-//            if (password1.equals(password2)) {
-//                Users users = new Users(username, password1, sex, email, phone);
-//                userServiceImpls.InsertUser(users);
-//                System.out.println("注册成功");
-//                return "login";
-//            } else {
-//                System.out.println("密码不一致");
-//                return "register";
-//            }
-//        } else {
-//            System.out.println("用户名已存在");
-//            return "register";
-//        }
-//    }
-
     @Override
     @RequestMapping("/")
     public String login() {
         return "login";
     }
-
-
-
     @RequestMapping("/doLogin")
     public String doLogin(HttpServletRequest request){
         String phone = request.getParameter("phone");
@@ -118,6 +79,7 @@ public class PersonControllerImpls implements PersonController {
             return "login";
         }
     }
+
     @RequestMapping("/forgetpassword")
     @Override
     public String forgetPassword() {
@@ -152,5 +114,12 @@ public class PersonControllerImpls implements PersonController {
             System.out.println("手机号已存在");
             return "register";
         }
+    }
+
+    @RequestMapping("/details")
+    public String GetAll(Map<String,Object> map){
+       List<Person> personList= personServiceImpls.findAllPerson();
+       map.put("personList",personList);
+        return "details";
     }
 }

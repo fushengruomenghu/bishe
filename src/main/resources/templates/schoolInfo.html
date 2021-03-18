@@ -1,0 +1,49 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>学校信息</title>
+</head>
+
+<body class="logobg_style">
+<div id="large-header" class="large-header login-page">
+    <canvas id="demo-canvas" width="1590" height="711"></canvas>
+    <div class="login-form">
+        <table>
+            <thead>
+                <tr>
+                    <th>院校名称</th>
+                    <th>院校所在地</th>
+                    <th>教育行政主管部门</th>
+                    <th>院校类型</th>
+                    <th>学历层次</th>
+                    <th>一流大学建设高校</th>
+                    <th>一流学科建设高校</th>
+                    <th>研究生院</th>
+                    <th>综合满意度</th>
+                    <th>院校环境满意度</th>
+                    <th>生活满意度</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="schoolInfo : ${schoolInfos}">
+                    <td th:text="${schoolInfoStat.index+1}">序号</td>
+                    <td th:text="${schoolInfo.schname}">院校名称</td>
+                    <td th:text="${schoolInfo.location}">院校所在地</td>
+                    <td th:text="${schoolInfo.belonged}">教育行政主管部门</td>
+                    <td th:text="${schoolInfo.type}">院校类型</td>
+                    <td th:text="${schoolInfo.education_level}">学历层次</td>
+                    <td th:text="${schoolInfo.yiliudaxue}">一流大学建设高校</td>
+                    <td th:text="${schoolInfo.yiliuxueke}">一流学科建设高校</td>
+                    <td th:text="${schoolInfo.graduate_school}">研究生院</td>
+                    <td th:text="${schoolInfo.comprehensive}">综合满意度</td>
+                    <td th:text="${schoolInfo.environment}">院校环境满意度</td>
+                    <td th:text="${schoolInfo.life}">生活满意度</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

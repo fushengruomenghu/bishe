@@ -23,12 +23,14 @@ public class Users {
     String leibie;
     @Column
     String pici;
+    @Column
+    String hobby;
 
     public Users() {
 
     }
 
-    public Users(Integer id, String username, String sex, String phone, String location, String grade, String leibie, String pici) {
+    public Users(Integer id, String username, String sex, String phone, String location, String grade, String leibie, String pici, String hobby) {
         this.id = id;
         this.username = username;
         this.sex = sex;
@@ -37,6 +39,7 @@ public class Users {
         this.grade = grade;
         this.leibie = leibie;
         this.pici = pici;
+        this.hobby = hobby;
     }
 
     public Integer getId() {
@@ -49,6 +52,14 @@ public class Users {
 
     public String getUsername() {
         return username;
+    }
+
+    public String getHobby() {
+        return hobby;
+    }
+
+    public void setHobby(String hobby) {
+        this.hobby = hobby;
     }
 
     public void setUsername(String username) {
