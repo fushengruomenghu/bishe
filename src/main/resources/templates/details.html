@@ -5,20 +5,6 @@
     <title>Title</title>
 </head>
 <body>
-    <table>
-        <thead>
-        <tr>
-            <th>username</th>
-            <th>password</th>
-        </tr>
-        </thead>
-
-        <tbody>
-            <tr th:each="person :${personList}">
-                <td th:text="${person.phone}">phone</td>
-                <td th:text="${person.password}">password</td>
-            </tr>
-        </tbody>
-    </table>
+    <a th:text="${session.schoolInfo.schname}"></a>
 </body>
 </html>

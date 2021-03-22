@@ -87,7 +87,7 @@ public class PersonControllerImpls implements PersonController {
             return "redirect:/schoolInfo";
         }else {
             System.out.println("用户名或密码错误");
-            return "login";
+            return "recommend";
         }
     }
 
@@ -132,5 +132,10 @@ public class PersonControllerImpls implements PersonController {
        List<Person> personList= personServiceImpls.findAllPerson();
        map.put("personList",personList);
         return "details";
+    }
+    @RequestMapping("/logout")
+    public String LogOut(HttpSession session){
+        session.removeAttribute("Users");
+        return "redirect:/";
     }
 }

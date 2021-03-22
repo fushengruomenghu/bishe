@@ -2,56 +2,138 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link th:href="@{css/bootstrap.min.css}" type="text/css" rel="stylesheet">
-    <link th:href="@{css/font-awesome.min.css}" type="text/javascript" rel="stylesheet"><!--    图标-->
-    <link th:href="@{css/bootsnav.css}" type="text/css" rel="stylesheet">
-    <link th:href="@{css/normalize.css}" type="text/css" rel="stylesheet">
-    <link th:href="@{css/css.css}" rel="stylesheet" type="text/css">
-    <script th:src="@{js/jquery-1.11.0.min.js}" type="text/javascript"></script>
-    <script th:src="@{js/bootstrap.min.js}" type="text/javascript"></script>
-    <script th:src="@{js/bootsnav.js}" type="text/javascript"></script>
-    <script th:src="@{js/jquery.js}" type="text/javascript"></script>
     <title>分数线</title>
+    <link th:href="@{css/css.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{css/head.css}" type="text/css" rel="stylesheet"/>
+    <link th:href="@{css/style.css}" type="text/css" rel="stylesheet">
+    <script th:src="@{js/clock.js}" type="text/javascript"></script>
+
 </head>
 <body>
 <div class="header-main">
     <div id="head" th:include="public/head :: common_head"></div>
 </div>
-<table align="center">
-    <tr>
-        <th>序号</th>
-        <th>地区</th>
-        <th>年份</th>
-        <th>考生类别</th>
-        <th>批次</th>
-        <th>分数线</th>
-    </tr>
-    <tr th:each="score : ${score_line}">
-        <td th:text="${scoreStat.index+1}"></td>
-        <td th:text="${score.location}"></td>
-        <td th:text="${score.year}"></td>
-        <td th:text="${score.leibie}"></td>
-        <td th:text="${score.pici}"></td>
-        <td th:text="${score.score}"></td>
-    </tr>
-    <tr>
-        <td colspan="8">
-            <div class="pagelist">
-                <p>当前<span th:text="${score_line.getNumber()} + 1"></span>页,总<span th:text="${score_line.totalPages}"></span>页
-                    　　　　　　　　　　　　　　　　　共<span th:text="${score_line.totalElements}"></span>条记录
-                    <a th:href="@{/scoreline}">首页</a>
-                    <a th:href="@{/scoreline(pageNum = ${score_line.hasPrevious()} ? ${score_line.getNumber() } : 1)}">上一页</a>
-                    <a th:href="@{/scoreline(pageNum = ${score_line.hasNext()} ? ${score_line.getNumber()} + 2 : ${score_line.totalPages})}">下一页</a>
-                    <a th:href="@{/scoreline(pageNum = ${score_line.totalPages})}">尾页</a></p>
-            </div>
-        </td>
-    </tr>
-</table>
+<div class="wrap">
+    <ul class="select">
+        <li class="select-list">
+            <dl id="select1">
+                <dt>省份：</dt>
+                <dd class="select-all selected"><a href="/gsfsx-0-0-0-0-1.html">全部</a></dd>
+                <dd><a href="/gsfsx-2681974-0-0-0-1.html">北京</a></dd>
+                <dd><a href="/gsfsx-2681975-0-0-0-1.html">天津</a></dd>
+                <dd><a href="/gsfsx-2681976-0-0-0-1.html">河北</a></dd>
+                <dd><a href="/gsfsx-2681977-0-0-0-1.html">河南</a></dd>
+                <dd><a href="/gsfsx-2681978-0-0-0-1.html">山东</a></dd>
+                <dd><a href="/gsfsx-2681979-0-0-0-1.html">山西</a></dd>
+                <dd><a href="/gsfsx-2681980-0-0-0-1.html">陕西</a></dd>
+                <dd><a href="/gsfsx-2681981-0-0-0-1.html">内蒙古</a></dd>
+                <dd><a href="/gsfsx-2681982-0-0-0-1.html">辽宁</a></dd>
+                <dd><a href="/gsfsx-2681983-0-0-0-1.html">吉林</a></dd>
+                <dd><a href="/gsfsx-2681984-0-0-0-1.html">黑龙江</a></dd>
+                <dd><a href="/gsfsx-2681985-0-0-0-1.html">上海</a></dd>
+                <dd><a href="/gsfsx-2681986-0-0-0-1.html">江苏</a></dd>
+                <dd><a href="/gsfsx-2681987-0-0-0-1.html">安徽</a></dd>
+                <dd><a href="/gsfsx-2681988-0-0-0-1.html">江西</a></dd>
+                <dd><a href="/gsfsx-2681989-0-0-0-1.html">湖北</a></dd>
+                <dd><a href="/gsfsx-2681990-0-0-0-1.html">湖南</a></dd>
+                <dd><a href="/gsfsx-2681991-0-0-0-1.html">重庆</a></dd>
+                <dd><a href="/gsfsx-2681992-0-0-0-1.html">四川</a></dd>
+                <dd><a href="/gsfsx-2681993-0-0-0-1.html">贵州</a></dd>
+                <dd><a href="/gsfsx-2681994-0-0-0-1.html">云南</a></dd>
+                <dd><a href="/gsfsx-2681995-0-0-0-1.html">广东</a></dd>
+                <dd><a href="/gsfsx-2681996-0-0-0-1.html">广西</a></dd>
+                <dd><a href="/gsfsx-2681997-0-0-0-1.html">福建</a></dd>
+                <dd><a href="/gsfsx-2681998-0-0-0-1.html">甘肃</a></dd>
+                <dd><a href="/gsfsx-2681999-0-0-0-1.html">宁夏</a></dd>
+                <dd><a href="/gsfsx-2682000-0-0-0-1.html">新疆</a></dd>
+                <dd><a href="/gsfsx-2682001-0-0-0-1.html">西藏</a></dd>
+                <dd><a href="/gsfsx-2682002-0-0-0-1.html">海南</a></dd>
+                <dd><a href="/gsfsx-2682003-0-0-0-1.html">浙江</a></dd>
+                <dd><a href="/gsfsx-2682004-0-0-0-1.html">青海</a></dd>
+            </dl>
+        </li>
+        <li class="select-list">
+            <dl id="select2">
+                <dt>年份：</dt>
+                <dd class="select-all selected"><a href="/gsfsx-0-0-0-0-1.html">全部</a></dd>
+                <dd><a href="/gsfsx-0-2020-0-0-1.html">2020</a></dd>
+                <dd><a href="/gsfsx-0-2019-0-0-1.html">2019</a></dd>
+                <dd><a href="/gsfsx-0-2018-0-0-1.html">2018</a></dd>
+                <dd><a href="/gsfsx-0-2017-0-0-1.html">2017</a></dd>
+                <dd><a href="/gsfsx-0-2016-0-0-1.html">2016</a></dd>
+                <dd><a href="/gsfsx-0-2015-0-0-1.html">2015</a></dd>
+                <dd><a href="/gsfsx-0-2014-0-0-1.html">2014</a></dd>
+                <dd><a href="/gsfsx-0-2013-0-0-1.html">2013</a></dd>
+                <dd><a href="/gsfsx-0-2012-0-0-1.html">2012</a></dd>
+                <dd><a href="/gsfsx-0-2011-0-0-1.html">2011</a></dd>
+                <dd><a href="/gsfsx-0-2010-0-0-1.html">2010</a></dd>
+            </dl>
+        </li>
+        <li class="select-list">
+            <dl id="select3">
+                <dt>类别：</dt>
+                <dd class="select-all selected"><a href="/gsfsx-0-0-0-0-1.html">全部</a></dd>
+                <dd><a href="/gsfsx-0-0-2682005-0-1.html">文科</a></dd>
+                <dd><a href="/gsfsx-0-0-2682006-0-1.html">理科</a></dd>
+                <dd><a href="/gsfsx-0-0-2682007-0-1.html">不分文理</a></dd>
+            </dl>
+        </li>
+        <li class="select-list">
+            <dl id="select4">
+                <dt>批次：</dt>
+                <dd class="select-all selected"><a href="/gsfsx-0-0-0-0-1.html">全部</a></dd>
+                <dd><a href="/gsfsx-0-0-0-2682202-1.html">本科批</a></dd>
+                <dd><a href="/gsfsx-0-0-0-2682009-1.html">本科一批</a></dd>
+                <dd><a href="/gsfsx-0-0-0-2682010-1.html">本科二批</a></dd>
+                <dd><a href="/gsfsx-0-0-0-2682011-1.html">本科三批</a></dd>
+                <dd><a href="/gsfsx-0-0-0-2682203-1.html">专科批</a></dd>
+                <dd><a href="/gsfsx-0-0-0-2682012-1.html">专科一批</a></dd>
+                <dd><a href="/gsfsx-0-0-0-2682013-1.html">专科二批</a></dd>
+            </dl>
+        </li>
+    </ul>
+    <table width="100%" border="0" cellpadding="0" cellspacing="1" class="bgddd">
+        <tbody>
+        <tr align="center" class="tb_title">
+            <th>序号</th>
+            <th>地区</th>
+            <th>年份</th>
+            <th>考生类别</th>
+            <th>批次</th>
+            <th>分数线</th>
+        </tr>
+        <tr th:each="score : ${score_line}" align="center" class="tb_content" id="a12654">
+            <td th:text="${scoreStat.index+1}"></td>
+            <td th:text="${score.getLocation()}"></td>
+            <td th:text="${score.getYear()}"></td>
+            <td th:text="${score.getLeibie()}"></td>
+            <td th:text="${score.getPici()}"></td>
+            <td th:text="${score.getScore()}"></td>
+        </tr>
+        </tbody>
+        <tr>
+            <td colspan="8">
+                <div class="pagelist">
+                    <p>当前<span th:text="${score_line.getNumber()} + 1"></span>页,总<span
+                            th:text="${score_line.getTotalPages()}"></span>页
+                        　　　　　　　　　　　　　　　　　共<span th:text="${score_line.getTotalElements()}"></span>条记录
+                        <a th:href="@{/scoreline}">首页</a>
+                        <a th:href="@{/scoreline(pageNum = ${score_line.hasPrevious()} ? ${score_line.getNumber() } : 1)}">上一页</a>
+                        <a th:href="@{/scoreline(pageNum = ${score_line.hasNext()} ? ${score_line.getNumber()} + 2 : ${score_line.getTotalPages()})}">下一页</a>
+                        <a th:href="@{/scoreline(pageNum = ${score_line.getTotalPages()})}">尾页</a></p>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
 <script>
-    $(document).ready(function() {
-        $("th").attr("align","center")
-        $("td").attr("align","left")
+    $(document).ready(function () {
+        $("th").attr("align", "center")
+        $("td").attr("align", "left")
     });
 </script>
+<div class="bottom_main">
+    <div id="bottom" th:include="public/bottom :: common_bottom"></div>
+</div>
 </body>
 </html>

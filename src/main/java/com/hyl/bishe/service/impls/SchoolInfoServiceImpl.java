@@ -20,6 +20,9 @@ public class SchoolInfoServiceImpl implements SchoolInfoService {
     public SchoolInfo findAllbyId(Integer id){
         return schoolInfoDao.findAllById(id);
     }
+    public SchoolInfo findAllbyName(String name){
+        return schoolInfoDao.findSchoolInfoBySchname(name);
+    }
 
     @Override
     public Page<SchoolInfo> findAll(Pageable Page) {

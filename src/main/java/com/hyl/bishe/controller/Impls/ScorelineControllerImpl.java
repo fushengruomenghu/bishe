@@ -30,7 +30,7 @@ public class ScorelineControllerImpl implements ScorelineController {
         if (pageNum == null) {
             pageNum=1;
         }
-        Sort sort=Sort.by(Sort.Direction.DESC,"year");
+        Sort sort=Sort.by(Sort.Direction.DESC,"location","year");
         Pageable pageable= PageRequest.of(pageNum-1,25,sort);
         Page<Scoreline> list = scorelineService.findAll(pageable);
 

@@ -35,5 +35,8 @@ public class UsersServiceImpl implements UsersService {
     public void sava(Users user){
         usersDao.save(user);
     }
+    public void deleteUser(Users user){
+        usersDao.delete(user);
+    }
 
 }

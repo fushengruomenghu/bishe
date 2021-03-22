@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -17,13 +18,13 @@ public class UsersControllerImpls implements UsersController {
     private UsersServiceImpl usersService;
 
 
+    @RequestMapping("/userinfo")
     @Override
     public String showUsersInfo() {
-        Users users=usersService.findUserByPhone("");
-        return "";
+        return "userinfo";
     }
-    @RequestMapping("updateUserInfo")
-    public String updateUserInfo(HttpServletRequest request){
+    @RequestMapping("/updateUserInfo")
+    public String updateUserInfo(HttpServletRequest request, HttpSession session){
         String username=request.getParameter("u_name");
         String sex=request.getParameter("u_sex");
         String phone=request.getParameter("u_phone");
@@ -32,20 +33,17 @@ public class UsersControllerImpls implements UsersController {
         String grade=request.getParameter("u_grade");
         String leibie=request.getParameter("u_leibie");
         String hobby=request.getParameter("u_hobby");
-        Users users=new Users();
-        sex=sex.equals("男")?"0":"女";
+        Users users=usersService.findUserByPhone(phone);
+        Integer id=users.getId();
+
+        usersService.deleteUser(users);
+        sex=sex.equals("男")?"0":"1";
         leibie=leibie.equals("文科")?"0":"1";
         pici=pici.equals("本科第一批次")?"0":"1";
-        users.setUsername(username);
-        users.setSex(sex);
-        users.setPhone(phone);
-        users.setLocation(location);
-        users.setPici(pici);
-        users.setGrade(grade);
-        users.setHobby(hobby);
-        users.setLeibie(leibie);
-        usersService.sava(users);
-        return "/schoolInfo";
+        Users user=new Users(id,username,sex,phone,location,grade,leibie,pici,hobby);
+        session.setAttribute("Users",user);
+        usersService.sava(user);
+        return "redirect:/schoolInfo";
     }
 
 }

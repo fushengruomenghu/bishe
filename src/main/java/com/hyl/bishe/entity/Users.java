@@ -11,7 +11,7 @@ public class Users {
     Integer id;
     @Column
     String username;
-    @Column
+    @Column(insertable = false,columnDefinition = "varchar default '0'")
     String sex;
     @Column
     String phone;
@@ -19,9 +19,9 @@ public class Users {
     String location;
     @Column
     String grade;
-    @Column
+    @Column(insertable = false,columnDefinition = "varchar default '0'")
     String leibie;
-    @Column
+    @Column(insertable = false,columnDefinition = "varchar default '0'")
     String pici;
     @Column
     String hobby;
