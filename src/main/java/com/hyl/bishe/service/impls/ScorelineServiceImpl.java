@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ScorelineServiceImpl implements ScorelineService {
     @Autowired
@@ -16,5 +18,25 @@ public class ScorelineServiceImpl implements ScorelineService {
     @Override
     public Page<Scoreline> findAll(Pageable page) {
         return scorelineDao.findAll(page);
+    }
+
+    @Override
+    public List<String> findProvince() {
+        return scorelineDao.findDistinctLocation();
+    }
+
+    @Override
+    public List<String> findYear() {
+        return scorelineDao.findDistinctYear();
+    }
+
+    @Override
+    public List<String> findleibie() {
+        return scorelineDao.findDistinctLeibie();
+    }
+
+    @Override
+    public List<String> findpici() {
+        return scorelineDao.findDistinctPici();
     }
 }

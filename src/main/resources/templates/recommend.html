@@ -3,241 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link th:href="@{css/bootstrap.min.css}" type="text/css" rel="stylesheet">
+    <link th:href="@{css/font-awesome.min.css}" type="text/javascript" rel="stylesheet">
+    <link th:href="@{css/bootsnav.css}" type="text/css" rel="stylesheet">
+    <link th:href="@{css/normalize.css}" type="text/css" rel="stylesheet">
+    <link th:href="@{css/css.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{js/jquery-1.11.0.min.js}" type="text/javascript"></script>
+    <script th:src="@{js/bootstrap.min.js}" type="text/javascript"></script>
+    <script th:src="@{js/bootsnav.js}" type="text/javascript"></script>
+    <script th:src="@{js/jquery.js}" type="text/javascript"></script>
+    <link th:href="@{css/css.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{css/head.css}" type="text/css" rel="stylesheet"/>
     <link th:href="@{css/style.css}" type="text/css" rel="stylesheet">
-    <script th:src="@{js/clock.js}" type="text/javascript"></script>
+    <script type="application/javascript">
+
+            function submit() {
+                $.ajax({
+                    url: '[[@{/doRecommend}]]',
+                    type: "post",
+                    data: {
+                        "location": $("#location").val(),
+                        "province": $("#province").val(),
+                        "leibie": $("#leibie").val(),
+                        "major": $("#zhuanye").val(),
+                        "grade": $("#grade").val(),
+                        "course1": $("#course1").val(),
+                        "course2": $("#course2").val(),
+                    },
+                    success: function (data) {
+                        $("#tbody").empty();
+                        for (var i in data){
+                            $("#tbody").append("<tr align=\"center\" class=\"tb_content\" >\n" +
+                                " <td align=\"left\">"+i+"</td>\n" +
+                                " <td align=\"left\"><a href='/GetSchoolInfo?name="+data[i].college+"'>"+data[i].college+"</a></td>\n" +
+                                " <td align=\"left\"><a href='/GetProfession?name="+data[i].majorname+"'>"+data[i].majorname+"</a></td>\n" +
+                                " </tr>");
+                        }
+                    }
+                });
+            }
+
+    </script>
 </head>
 <body>
-<ul class="select">
-    <li class="select-list">
-        <dl id="select1">
-            <dt>省份：</dt>
-            <dd class="select-all selected"><a href="/yuanxiaoku-0-0-0-0-0-0-1.html">全部</a></dd>
-
-            <dd><a href="/yuanxiaoku-2681974-0-0-0-0-0-1.html">北京</a></dd>
-
-            <dd><a href="/yuanxiaoku-2681975-0-0-0-0-0-1.html">天津</a></dd>
-
-            <dd><a href="/yuanxiaoku-2681976-0-0-0-0-0-1.html">河北</a></dd>
-
-            <dd><a href="/yuanxiaoku-2681977-0-0-0-0-0-1.html">河南</a></dd>
-
-            <dd><a href="/yuanxiaoku-2681978-0-0-0-0-0-1.html">山东</a></dd>
-
-            <dd><a href="/yuanxiaoku-2681979-0-0-0-0-0-1.html">山西</a></dd>
-
-            <dd><a href="/yuanxiaoku-2681980-0-0-0-0-0-1.html">陕西</a></dd>
-
-            <dd><a href="/yuanxiaoku-2681981-0-0-0-0-0-1.html">内蒙古</a></dd>
-
-            <dd><a href="/yuanxiaoku-2681982-0-0-0-0-0-1.html">辽宁</a></dd>
-
-            <dd><a href="/yuanxiaoku-2681983-0-0-0-0-0-1.html">吉林</a></dd>
-
-            <dd><a href="/yuanxiaoku-2681984-0-0-0-0-0-1.html">黑龙江</a></dd>
-
-            <dd><a href="/yuanxiaoku-2681985-0-0-0-0-0-1.html">上海</a></dd>
-
-            <dd><a href="/yuanxiaoku-2681986-0-0-0-0-0-1.html">江苏</a></dd>
-
-            <dd><a href="/yuanxiaoku-2681987-0-0-0-0-0-1.html">安徽</a></dd>
-
-            <dd><a href="/yuanxiaoku-2681988-0-0-0-0-0-1.html">江西</a></dd>
-
-            <dd><a href="/yuanxiaoku-2681989-0-0-0-0-0-1.html">湖北</a></dd>
-
-            <dd><a href="/yuanxiaoku-2681990-0-0-0-0-0-1.html">湖南</a></dd>
-
-            <dd><a href="/yuanxiaoku-2681991-0-0-0-0-0-1.html">重庆</a></dd>
-
-            <dd><a href="/yuanxiaoku-2681992-0-0-0-0-0-1.html">四川</a></dd>
-
-            <dd><a href="/yuanxiaoku-2681993-0-0-0-0-0-1.html">贵州</a></dd>
-
-            <dd><a href="/yuanxiaoku-2681994-0-0-0-0-0-1.html">云南</a></dd>
-
-            <dd><a href="/yuanxiaoku-2681995-0-0-0-0-0-1.html">广东</a></dd>
-
-            <dd><a href="/yuanxiaoku-2681996-0-0-0-0-0-1.html">广西</a></dd>
-
-            <dd><a href="/yuanxiaoku-2681997-0-0-0-0-0-1.html">福建</a></dd>
-
-            <dd><a href="/yuanxiaoku-2681998-0-0-0-0-0-1.html">甘肃</a></dd>
-
-            <dd><a href="/yuanxiaoku-2681999-0-0-0-0-0-1.html">宁夏</a></dd>
-
-            <dd><a href="/yuanxiaoku-2682000-0-0-0-0-0-1.html">新疆</a></dd>
-
-            <dd><a href="/yuanxiaoku-2682001-0-0-0-0-0-1.html">西藏</a></dd>
-
-            <dd><a href="/yuanxiaoku-2682002-0-0-0-0-0-1.html">海南</a></dd>
-
-            <dd><a href="/yuanxiaoku-2682003-0-0-0-0-0-1.html">浙江</a></dd>
-
-            <dd><a href="/yuanxiaoku-2682004-0-0-0-0-0-1.html">青海</a></dd>
-
-        </dl>
-    </li>
-    <li class="select-list">
-        <dl id="select2">
-            <dt>类型：</dt>
-            <dd class="select-all selected"><a href="/yuanxiaoku-0-0-0-0-0-0-1.html">全部</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-2682204-0-0-0-0-1.html">综合类</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-2682205-0-0-0-0-1.html">理工类</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-2682206-0-0-0-0-1.html">财经类</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-2682207-0-0-0-0-1.html">农林类</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-2682208-0-0-0-0-1.html">林业类</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-2682209-0-0-0-0-1.html">医药类</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-2682210-0-0-0-0-1.html">师范类</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-2682211-0-0-0-0-1.html">体育类</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-2682212-0-0-0-0-1.html">语言类</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-2682213-0-0-0-0-1.html">政法类</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-2682214-0-0-0-0-1.html">艺术类</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-2682215-0-0-0-0-1.html">民族类</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-2682216-0-0-0-0-1.html">军事类</a></dd>
-
-        </dl>
-    </li>
-    <li class="select-list">
-        <dl id="select3">
-            <dt>性质：</dt>
-            <dd class="select-all selected"><a href="/yuanxiaoku-0-0-0-0-0-0-1.html">全部</a></dd>
-            <dd><a href="/yuanxiaoku-0-0-1-0-0-0-1.html">公办</a></dd>
-            <dd><a href="/yuanxiaoku-0-0-2-0-0-0-1.html">民办</a></dd>
-        </dl>
-    </li>
-    <li class="select-list">
-        <dl id="select4">
-            <dt>层次：</dt>
-            <dd class="select-all selected"><a href="/yuanxiaoku-0-0-0-0-0-0-1.html">全部</a></dd>
-            <dd><a href="/yuanxiaoku-0-0-0-1-0-0-1.html">本科</a></dd>
-            <dd><a href="/yuanxiaoku-0-0-0-2-0-0-1.html">专科</a></dd>
-        </dl>
-    </li>
-    <li class="select-list">
-        <dl id="select5">
-            <dt>排名：</dt>
-            <dd class="select-all selected"><a href="/yuanxiaoku-0-0-0-0-0-0-1.html">全部</a></dd>
-            <dd><a href="/yuanxiaoku-0-0-0-0-1-0-1.html">武书连榜</a></dd>
-            <dd><a href="/yuanxiaoku-0-0-0-0-2-0-1.html">校友会榜</a></dd>
-            <dd><a href="/yuanxiaoku-0-0-0-0-3-0-1.html">网大榜</a></dd>
-            <dd><a href="/yuanxiaoku-0-0-0-0-4-0-1.html">竞争力榜</a></dd>
-            <dd><a href="/yuanxiaoku-0-0-0-0-5-0-1.html">医药榜</a></dd>
-            <dd><a href="/yuanxiaoku-0-0-0-0-6-0-1.html" title="在校学生对学校的综合满意度">综合满意度</a></dd>
-            <dd><a href="/yuanxiaoku-0-0-0-0-7-0-1.html" title="在校学生对学校的环境满意度">环境满意度</a></dd>
-            <dd><a href="/yuanxiaoku-0-0-0-0-8-0-1.html" title="在校学生对学校的生活满意度">生活满意度</a></dd>
-        </dl>
-    </li>
-    <li class="select-list">
-        <dl id="select6">
-            <dt>标签：</dt>
-            <dd class="select-all selected"><a href="/yuanxiaoku-0-0-0-0-0-0-1.html">全部</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-0-0-0-0-4453083-1.html">双一流</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-0-0-0-0-4453084-1.html">985</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-0-0-0-0-4453085-1.html">211</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-0-0-0-0-4453086-1.html">独立艺术院校</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-0-0-0-0-4453087-1.html">参照独立艺术院校</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-0-0-0-0-4453088-1.html">艺术类</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-0-0-0-0-5786735-1.html">强基计划</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-0-0-0-0-5786867-1.html">示范性高职</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-0-0-0-0-5786868-1.html">骨干高职</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-0-0-0-0-5786869-1.html">国防七校</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-0-0-0-0-5786870-1.html">军工六校</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-0-0-0-0-5786871-1.html">兵工七子</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-0-0-0-0-5786872-1.html">五院四系</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-0-0-0-0-5786873-1.html">建筑老八校</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-0-0-0-0-5786874-1.html">八大美院</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-0-0-0-0-5786875-1.html">九校联盟</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-0-0-0-0-5786876-1.html">四大工学院</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-0-0-0-0-5786877-1.html">六大师范</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-0-0-0-0-5786878-1.html">机械四小龙</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-0-0-0-0-5786880-1.html">电气两龙四虎</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-0-0-0-0-5786881-1.html">五朵金花</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-0-0-0-0-5786882-1.html">医学十一大金刚</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-0-0-0-0-5786883-1.html">医学霸主</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-0-0-0-0-5786884-1.html">南北医学双雄</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-0-0-0-0-5786885-1.html">南药北药</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-0-0-0-0-6481098-1.html">卓越医生计划</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-0-0-0-0-6481099-1.html">卓越医生（中医）计划</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-0-0-0-0-6481100-1.html">卓越农林计划</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-0-0-0-0-6481102-1.html">卓越工程师计划</a></dd>
-
-            <dd><a href="/yuanxiaoku-0-0-0-0-0-6511811-1.html">招生老师入驻</a></dd>
-
-        </dl>
-    </li>
-</ul>
-<div class="wrap">
-    <table width="100%" border="0" cellpadding="0" cellspacing="1" class="bgddd">
-        <tbody>
-        <tr align="center" class="tb_title">
-            <td>专业排名</td>
-            <td>专业名称</td>
-            <td class="pc">学历类别</td>
-            <td>专业类别</td>
-            <td class="pc">学科门类</td>
-            <td>查看详细</td>
+<div class="header-main">
+    <div id="head" th:include="public/head :: common_head"></div>
+</div>
+<div>
+    <div class="wrap">
+        <select name="postdb[shengfen]" id="location" class="gfxdx_shengfen index_input">
+            <option value="">选择生源地</option>
+            <option th:each="loc:${location}" th:value="${loc}" th:text="${loc}" value="1">
+            </option>
+        </select>
+        <select name="postdb[yx_localprovince]" id="province" class="gfxdx_shengfen index_input">
+            <option value="">选择院校省份</option>
+            <option value="">全国</option>
+            <option th:each="pro:${province}" th:value="${pro}" th:text="${pro}" value="1"></option>
+        </select>
+        <select name="postdb[leibie]" id="leibie" class="gfxdx_kelei index_input">
+            <option value="">选择文理科</option>
+            <option th:each="leibie:${pici}" th:value="${leibie}" th:text="${leibie}" value="1"></option>
+        </select>
+        <select name="postdb[course1]" id="course1" class="gfxdx_kelei index_input">
+            <option value="">选择偏好科目一</option>
+            <option value="物理">物理</option>
+            <option value="历史">历史</option>
+        </select>
+        <select name="postdb[course2]" id="course2" class="gfxdx_kelei index_input">
+            <option value="">选择偏好科目二</option>
+            <option value="物理">生物</option>
+            <option value="化学">化学</option>
+            <option value="政治">政治</option>
+            <option value="地理">地理</option>
+        </select>
+        <input name="postdb[grade]" id="grade" class="gfxdx_fenshu index_input" type="number" placeholder=" 请输入高考分数">
+        <div class="gfxdx_btn cursor" onclick="submit()">点这里，选大学 <i class="fa fa-hand-o-up"></i></div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div>
+    <table width="50%" border="0" cellpadding="0" cellspacing="1" class="bgddd">
+        <thead >
+        <tr  align="center" class="tb_title">
+            <th>序号</th>
+            <th>推荐学校</th>
+            <th>推荐专业</th>
+            <th></th>
         </tr>
-        <tr align="center" class="tb_content" id="a12654">
-            <td>2</td>
-            <td><a onclick="parent_url('/bencandy-5-12654-1.html')">工程管理</a></td>
-            <td class="pc">本科专业</td>
-            <td>管理科学与工程类</td>
-            <td class="pc">管理学</td>
-            <td><a onclick="add_localstorage('zy','12654','工程管理')"><font id="t12654"><i class="fa fa-plus"></i>
-                加入自选</font></a></td>
-        </tr>
+        </thead>
+        <tbody id="tbody">
+
         </tbody>
     </table>
-    <div class="showpage mt10"><a href="zhuanyeku-1-0-0-0-1.html" title="首页">首页</a> <a href="zhuanyeku-1-0-0-0-1.html"
-                                                                                       title="上一页">上一页</a> <a
-            href="#"><font color="red">1</font></a> <a href="zhuanyeku-1-0-0-0-2.html" title="第2页">2</a> <a
-            href="zhuanyeku-1-0-0-0-3.html" title="第3页">3</a> <a href="zhuanyeku-1-0-0-0-4.html" title="第4页">4</a> <a
-            href="zhuanyeku-1-0-0-0-5.html" title="第5页">5</a> <a href="zhuanyeku-1-0-0-0-6.html" title="第6页">6</a> <a
-            href="zhuanyeku-1-0-0-0-7.html" title="第7页">7</a> <a href="zhuanyeku-1-0-0-0-2.html" title="下一页">下一页</a> <a
-            href="zhuanyeku-1-0-0-0-36.html" title="尾页">尾页</a> <a href="#"><font color="red">1</font>/36/705</a></div>
-
+</div>
+<div class="bottom_main">
+    <div id="bottom" th:include="public/bottom :: common_bottom"></div>
 </div>
 </body>
 </html>

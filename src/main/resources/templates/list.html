@@ -13,22 +13,102 @@
     <script th:src="@{js/bootstrap.min.js}" type="text/javascript"></script>
     <script th:src="@{js/bootsnav.js}" type="text/javascript"></script>
     <script th:src="@{js/jquery.js}" type="text/javascript"></script>
+    <link th:href="@{css/css.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{css/head.css}" type="text/css" rel="stylesheet"/>
+    <link th:href="@{css/style.css}" type="text/css" rel="stylesheet">
+    <script th:src="@{js/clock.js}" type="text/javascript"></script>
     <title>列表</title>
 </head>
 
-<body class="logobg_style">
-<div id="large-header" class="large-header login-page">
-    <canvas id="demo-canvas" width="1590" height="711"></canvas>
-    <div class="login-form">
-
-
+<body>
+        <div class="wrap">
+            <ul class="select">
+                <li class="select-list ">
+                    <dl id="select1">
+                        <dt>本科 <i class="fa fa-angle-right"></i></dt>
+                        <dd class="select-all selected"><a href="/zhuanyeku-1-0-0-0-1.html">全部</a></dd>
+                        <dd><a href="/zhuanyeku-2682218-0-0-0-1.html">哲学</a></dd>
+                        <dd><a href="/zhuanyeku-2682219-0-0-0-1.html">经济学</a></dd>
+                        <dd><a href="/zhuanyeku-2682220-0-0-0-1.html">法学</a></dd>
+                        <dd><a href="/zhuanyeku-2682221-0-0-0-1.html">教育学</a></dd>
+                        <dd><a href="/zhuanyeku-2682222-0-0-0-1.html">文学</a></dd>
+                        <dd><a href="/zhuanyeku-2682223-0-0-0-1.html">历史学</a></dd>
+                        <dd><a href="/zhuanyeku-2682224-0-0-0-1.html">理学</a></dd>
+                        <dd><a href="/zhuanyeku-2682225-0-0-0-1.html">工学</a></dd>
+                        <dd><a href="/zhuanyeku-2682226-0-0-0-1.html">农学</a></dd>
+                        <dd><a href="/zhuanyeku-2682227-0-0-0-1.html">医学</a></dd>
+                        <dd><a href="/zhuanyeku-2682228-0-0-0-1.html">管理学</a></dd>
+                        <dd><a href="/zhuanyeku-2682229-0-0-0-1.html">艺术学</a></dd>
+                    </dl>
+                </li>
+                <li class="select-list ">
+                    <dl id="select2">
+                        <dt>专科 <i class="fa fa-angle-right"></i></dt>
+                        <dd class=""><a href="/zhuanyeku-2-0-0-0-1.html">全部</a></dd>
+                        <dd><a href="/zhuanyeku-2682230-0-0-0-1.html">农林牧渔</a></dd>
+                        <dd><a href="/zhuanyeku-2682231-0-0-0-1.html">资源环境与安全</a></dd>
+                        <dd><a href="/zhuanyeku-2682232-0-0-0-1.html">能源动力与材料</a></dd>
+                        <dd><a href="/zhuanyeku-2682233-0-0-0-1.html">土木建筑</a></dd>
+                        <dd><a href="/zhuanyeku-2682234-0-0-0-1.html">水利</a></dd>
+                        <dd><a href="/zhuanyeku-2682235-0-0-0-1.html">装备制造</a></dd>
+                        <dd><a href="/zhuanyeku-2682236-0-0-0-1.html">生物与化工</a></dd>
+                        <dd><a href="/zhuanyeku-2682237-0-0-0-1.html">轻工纺织</a></dd>
+                        <dd><a href="/zhuanyeku-2682238-0-0-0-1.html">食品药品与粮食</a></dd>
+                        <dd><a href="/zhuanyeku-2682239-0-0-0-1.html">交通运输</a></dd>
+                        <dd><a href="/zhuanyeku-2682240-0-0-0-1.html">电子信息</a></dd>
+                        <dd><a href="/zhuanyeku-2682241-0-0-0-1.html">医药卫生</a></dd>
+                        <dd><a href="/zhuanyeku-2682242-0-0-0-1.html">财经商贸</a></dd>
+                        <dd><a href="/zhuanyeku-2682243-0-0-0-1.html">旅游</a></dd>
+                        <dd><a href="/zhuanyeku-2682244-0-0-0-1.html">文化艺术</a></dd>
+                        <dd><a href="/zhuanyeku-2682245-0-0-0-1.html">新闻传播</a></dd>
+                        <dd><a href="/zhuanyeku-2682246-0-0-0-1.html">教育与体育</a></dd>
+                        <dd><a href="/zhuanyeku-2682247-0-0-0-1.html">公安与司法</a></dd>
+                        <dd><a href="/zhuanyeku-2682248-0-0-0-1.html">公共管理与服务</a></dd>
+                    </dl>
+                </li>
+            </ul>
+            <table width="100%" border="0" cellpadding="0" cellspacing="1" class="bgddd">
+                <tbody>
+                <tr  align="center" class="tb_title">
+                    <th>序号</th>
+                    <th>专业排名</th>
+                    <th>专业名称</th>
+                    <th>学历类别</th>
+                    <th>专业类别</th>
+                    <th>学科门类</th>
+                    <th></th>
+                </tr>
+                <tr th:each="proinfo: ${}" align="center" class="tb_content" id="a12654">
+                    <td th:text="${proinfoStat.index+1}"></td>
+                    <td th:text="${proinfo.getRanks()}">专业排名</td>
+                    <td>
+                        <a th:text="${proinfo.getProname()}"></a>
+                    </td>
+                    <td th:text="${proinfo.getDegree_category()}">学历类别</td>
+                    <td th:text="${proinfo.getPro_category()}">专业类别</td>
+                    <td th:text="${proinfo.getDisciplines()}">学科门类</td>
+                    <td ><a th:href="@{/GetProfession(name=${proinfo.getProname()})}">
+                        <input type="button" value="详情"/>
+                    </a>
+                    </td>
+                </tr>
+                </tbody>
+                <tr>
+                    <td colspan="8">
+                        <div class="pagelist">
+                            <p>当前<span th:text="${profession.getNumber()} + 1"></span>页,总<span th:text="${profession.getTotalPages()}"></span>页
+                                　　　　　　　　　　　　　　　　　共<span th:text="${profession.getTotalElements()}"></span>条记录
+                                <a th:href="@{/professioninfo}">首页</a>
+                                <a th:href="@{/professioninfo(pageNum = ${profession.hasPrevious()} ? ${profession.getNumber() } : 1)}">上一页</a>
+                                <a th:href="@{/professioninfo(pageNum = ${profession.hasNext()} ? ${profession.getNumber()} + 2 : ${profession.getTotalPages()})}">下一页</a>
+                                <a th:href="@{/professioninfo(pageNum = ${profession.getTotalPages()})}">尾页</a></p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 </div>
-
-<script th:src="@{js/TweenLite/TweenLite.min.js}"></script>
-<script th:src="@{js/TweenLite/EasePack.min.js}"></script>
-<script th:src="@{js/TweenLite/rAF.js}"></script>
-<script th:src="@{js/TweenLite/demo-1.js}"></script>
 <!--<script th:src="${}"> </script>-->
 </body>
 </html>

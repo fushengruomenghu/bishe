@@ -5,6 +5,13 @@ import com.hyl.bishe.entity.Scoreline;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public interface ScorelineService {
     Page<Scoreline> findAll(Pageable page);
+
+    List<String> findProvince();
+    List<String> findYear();
+    List<String> findleibie();
+    List<String> findpici();
 }

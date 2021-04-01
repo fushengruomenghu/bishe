@@ -39,7 +39,7 @@
 						<input type="password" class="form-control" name="password" id="password" placeholder="密码" autocomplete="off">
 					</div>
 				</div>
-					<div class=" textright"><a href="/forgetpassword" class="forget">忘记密码？</a></div>
+					<div class=" textright"><a th:href="@{/forgetpassword}" class="forget">忘记密码？</a></div>
                   <div class="tishi"></div>
 				<div class="form-group">
                     <input type="submit" class="btn btn-danger btn-block btn-login" onclick="f()" value="登录">
@@ -50,13 +50,6 @@
                     <a href="/register" class="forget">立即注册</a>
                 </div>
 			</form>
-                <script>
-                    function f() {
-                        var phone=$("#phone").val();
-                        var pasword=$("#password").val()
-                        alert(phone+"     "+pasword);
-                    }
-                </script>
   			</div>
   			
   		</div>

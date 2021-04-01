@@ -21,3 +21,10 @@ spring:
   devtools:
     restart:
       additional-paths: resources/**,static/**,templates/**
+logging:
+  charset:
+    console: utf-8
+#  file:
+#    name: springboot.log
+#  level: error
+

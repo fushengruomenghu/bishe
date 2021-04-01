@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Controller
 public class ScorelineControllerImpl implements ScorelineController {
@@ -27,6 +28,16 @@ public class ScorelineControllerImpl implements ScorelineController {
 
     @RequestMapping("/scoreline")
     public String ListSchool(HttpServletResponse response, Model model, Integer pageNum){
+
+        List<String> province= scorelineService.findProvince();
+        List<String> leibie= scorelineService.findleibie();
+        List<String> pici= scorelineService.findpici();
+        List<String> year= scorelineService.findYear();
+        model.addAttribute("province",province);
+        model.addAttribute("leibie",leibie);
+        model.addAttribute("year",year);
+        model.addAttribute("pici",pici);
+
         if (pageNum == null) {
             pageNum=1;
         }

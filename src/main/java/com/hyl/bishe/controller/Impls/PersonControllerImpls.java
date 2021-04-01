@@ -7,13 +7,9 @@ import com.hyl.bishe.service.impls.PersonServiceImpls;
 import com.hyl.bishe.service.impls.UsersServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.context.request.WebRequest;
 
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
@@ -131,7 +127,7 @@ public class PersonControllerImpls implements PersonController {
     public String GetAll(Map<String,Object> map){
        List<Person> personList= personServiceImpls.findAllPerson();
        map.put("personList",personList);
-        return "details";
+        return "schooldetails";
     }
     @RequestMapping("/logout")
     public String LogOut(HttpSession session){

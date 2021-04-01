@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>院校详情</title>
+    <link th:href="@{css/style.css}" type="text/css" rel="stylesheet">
+    <script th:src="@{js/clock.js}" type="text/javascript"></script>
+</head>
+<body>
+<!--<a th:text="${session.university.getName()}"></a>-->
+    <div class="yxk">
+        <div class="wrap">
+            <div class="school">
+                <div class="schoolname" align="center" ><b th:text="${session.university.getName()}"></b></div>
+                <div id="Clock" class="schoolinfo mt10" align="center"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="yuanxiaoneirong_tt"><i class="fa fa-list-ul" id="zygk"></i> 专业概况</div>
+    <div class="yuanxiaoneirong_c">
+        <div class="yuanxiaoneirong_gk">
+            <ul>
+                <li class="yuanxiaoneirong_gk_title">硕士点数</li>
+                <li class="yuanxiaoneirong_gk_content" th:text="${session.university.degreeNum}">282&nbsp;</li>
+                <li class="yuanxiaoneirong_gk_title">博士点数</li>
+                <li class="yuanxiaoneirong_gk_content" th:text="${session.university.boshidian}">258&nbsp;</li>
+                <li class="yuanxiaoneirong_gk_title">重点学科</li>
+                <li class="yuanxiaoneirong_gk_content" th:text="${session.university.keySubjects}">54&nbsp;</li>
+                <li class="yuanxiaoneirong_gk_title">重点实验室</li>
+                <li class="yuanxiaoneirong_gk_content" th:text="${session.university.getKeyLaboratory()}">47&nbsp;</li>
+                <li class="yuanxiaoneirong_gk_title">创建时间</li>
+                <li class="yuanxiaoneirong_gk_content" th:text="${session.university.getCreationTime()}">1898年&nbsp;</li>
+                <li class="yuanxiaoneirong_gk_title">占地面积</li>
+                <li class="yuanxiaoneirong_gk_content" th:text="${session.university.getArea()}">
+                <li class="yuanxiaoneirong_gk_title">办学性质</li>
+                <li class="yuanxiaoneirong_gk_content" th:text="${session.university.getXingzhi()}">公办&nbsp;</li>
+                <li class="yuanxiaoneirong_gk_title">学生人数</li>
+                <li class="yuanxiaoneirong_gk_content" th:text="${session.university.getStuNum()}">2万9千人&nbsp;</li>
+                <li class="yuanxiaoneirong_gk_title">院士人数</li>
+                <li class="yuanxiaoneirong_gk_content" th:text="${session.university.getAcademicianNum()}">72&nbsp;</li>
+                <li class="yuanxiaoneirong_gk_title">招办电话</li>
+                <li class="yuanxiaoneirong_gk_content" th:text="${session.university.getTelephone()}">010-62751407&nbsp;</li>
+                <li class="yuanxiaoneirong_gk_title">学校网址</li>
+                <li class="yuanxiaoneirong_gk_content">
+                    <a th:href="@{${session.university.getSchWebsite()}}" th:text="${session.university.getSchWebsite()}">&nbsp;</a></li>
+                <li class="yuanxiaoneirong_gk_title">招生网址</li>
+                <li class="yuanxiaoneirong_gk_content">
+                    <a th:href="@{${session.university.getEnrollmentWebsite()}}" th:text="${session.university.getEnrollmentWebsite()}">&nbsp;</a></li>
+            </ul>
+            <div class="cleardiv"></div>
+            <div class="yuanxiaoneirong_t"> 院校简介</div>
+        </div>
+    </div>
+</body>
+</html>

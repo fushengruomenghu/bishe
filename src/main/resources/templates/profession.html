@@ -3,6 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>专业</title>
+    <link th:href="@{css/bootstrap.min.css}" type="text/css" rel="stylesheet">
+    <link th:href="@{css/font-awesome.min.css}" type="text/javascript" rel="stylesheet">
+    <link th:href="@{css/bootsnav.css}" type="text/css" rel="stylesheet">
+    <link th:href="@{css/normalize.css}" type="text/css" rel="stylesheet">
+    <link th:href="@{css/css.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{js/jquery-1.11.0.min.js}" type="text/javascript"></script>
+    <script th:src="@{js/bootstrap.min.js}" type="text/javascript"></script>
+    <script th:src="@{js/bootsnav.js}" type="text/javascript"></script>
+    <script th:src="@{js/jquery.js}" type="text/javascript"></script>
     <link th:href="@{css/css.css}" rel="stylesheet" type="text/css">
     <link th:href="@{css/head.css}" type="text/css" rel="stylesheet"/>
     <link th:href="@{css/style.css}" type="text/css" rel="stylesheet">
@@ -19,44 +28,19 @@
         <li class="select-list ">
             <dl id="select1">
                 <dt>本科 <i class="fa fa-angle-right"></i></dt>
-                <dd><a href="/zhuanyeku-1-0-0-0-1.html">全部</a></dd>
-                <dd><a href="/zhuanyeku-2682218-0-0-0-1.html">哲学</a></dd>
-                <dd><a href="/zhuanyeku-2682219-0-0-0-1.html">经济学</a></dd>
-                <dd><a href="/zhuanyeku-2682220-0-0-0-1.html">法学</a></dd>
-                <dd><a href="/zhuanyeku-2682221-0-0-0-1.html">教育学</a></dd>
-                <dd><a href="/zhuanyeku-2682222-0-0-0-1.html">文学</a></dd>
-                <dd><a href="/zhuanyeku-2682223-0-0-0-1.html">历史学</a></dd>
-                <dd><a href="/zhuanyeku-2682224-0-0-0-1.html">理学</a></dd>
-                <dd><a href="/zhuanyeku-2682225-0-0-0-1.html">工学</a></dd>
-                <dd><a href="/zhuanyeku-2682226-0-0-0-1.html">农学</a></dd>
-                <dd><a href="/zhuanyeku-2682227-0-0-0-1.html">医学</a></dd>
-                <dd><a href="/zhuanyeku-2682228-0-0-0-1.html">管理学</a></dd>
-                <dd><a href="/zhuanyeku-2682229-0-0-0-1.html">艺术学</a></dd>
+                <dd class="select-all selected"><a th:href="@{/professioninfo(degree_category='本科专业')}">全部</a></dd>
+                <dd><a th:each="bengke :${bk}"
+                       th:text="${bengke}"
+                       th:href="@{/professioninfo(disciplines=${bengke})}"></a></dd>
             </dl>
         </li>
         <li class="select-list ">
             <dl id="select2">
                 <dt>专科 <i class="fa fa-angle-right"></i></dt>
-                <dd class="select-all selected"><a href="/zhuanyeku-2-0-0-0-1.html">全部</a></dd>
-                <dd><a href="/zhuanyeku-2682230-0-0-0-1.html">农林牧渔</a></dd>
-                <dd><a href="/zhuanyeku-2682231-0-0-0-1.html">资源环境与安全</a></dd>
-                <dd><a href="/zhuanyeku-2682232-0-0-0-1.html">能源动力与材料</a></dd>
-                <dd><a href="/zhuanyeku-2682233-0-0-0-1.html">土木建筑</a></dd>
-                <dd><a href="/zhuanyeku-2682234-0-0-0-1.html">水利</a></dd>
-                <dd><a href="/zhuanyeku-2682235-0-0-0-1.html">装备制造</a></dd>
-                <dd><a href="/zhuanyeku-2682236-0-0-0-1.html">生物与化工</a></dd>
-                <dd><a href="/zhuanyeku-2682237-0-0-0-1.html">轻工纺织</a></dd>
-                <dd><a href="/zhuanyeku-2682238-0-0-0-1.html">食品药品与粮食</a></dd>
-                <dd><a href="/zhuanyeku-2682239-0-0-0-1.html">交通运输</a></dd>
-                <dd><a href="/zhuanyeku-2682240-0-0-0-1.html">电子信息</a></dd>
-                <dd><a href="/zhuanyeku-2682241-0-0-0-1.html">医药卫生</a></dd>
-                <dd><a href="/zhuanyeku-2682242-0-0-0-1.html">财经商贸</a></dd>
-                <dd><a href="/zhuanyeku-2682243-0-0-0-1.html">旅游</a></dd>
-                <dd><a href="/zhuanyeku-2682244-0-0-0-1.html">文化艺术</a></dd>
-                <dd><a href="/zhuanyeku-2682245-0-0-0-1.html">新闻传播</a></dd>
-                <dd><a href="/zhuanyeku-2682246-0-0-0-1.html">教育与体育</a></dd>
-                <dd><a href="/zhuanyeku-2682247-0-0-0-1.html">公安与司法</a></dd>
-                <dd><a href="/zhuanyeku-2682248-0-0-0-1.html">公共管理与服务</a></dd>
+                <dd class=""><a th:href="@{/professioninfo(degree_category='高职专科专业')}">全部</a></dd>
+                <dd><a th:each="zuanke :${zk}"
+                       th:text="${zuanke}"
+                       th:href="@{/professioninfo(disciplines=${zuanke})}"></a></dd>
             </dl>
         </li>
     </ul>
@@ -75,7 +59,8 @@
             <td th:text="${proinfoStat.index+1}"></td>
             <td th:text="${proinfo.getRanks()}">专业排名</td>
             <td>
-                <a th:text="${proinfo.getProname()}"></a>
+                <a th:text="${proinfo.getProname()}"
+                   th:href="@{/GetProfession(name=${proinfo.getProname()})}"></a>
             </td>
             <td th:text="${proinfo.getDegree_category()}">学历类别</td>
             <td th:text="${proinfo.getPro_category()}">专业类别</td>

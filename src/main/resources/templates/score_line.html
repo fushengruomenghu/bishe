@@ -3,6 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>分数线</title>
+    <link th:href="@{css/bootstrap.min.css}" type="text/css" rel="stylesheet">
+    <link th:href="@{css/font-awesome.min.css}" type="text/javascript" rel="stylesheet">
+    <link th:href="@{css/bootsnav.css}" type="text/css" rel="stylesheet">
+    <link th:href="@{css/normalize.css}" type="text/css" rel="stylesheet">
+    <link th:href="@{css/css.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{js/jquery-1.11.0.min.js}" type="text/javascript"></script>
+    <script th:src="@{js/bootstrap.min.js}" type="text/javascript"></script>
+    <script th:src="@{js/bootsnav.js}" type="text/javascript"></script>
+    <script th:src="@{js/jquery.js}" type="text/javascript"></script>
     <link th:href="@{css/css.css}" rel="stylesheet" type="text/css">
     <link th:href="@{css/head.css}" type="text/css" rel="stylesheet"/>
     <link th:href="@{css/style.css}" type="text/css" rel="stylesheet">
@@ -18,77 +27,37 @@
         <li class="select-list">
             <dl id="select1">
                 <dt>省份：</dt>
-                <dd class="select-all selected"><a href="/gsfsx-0-0-0-0-1.html">全部</a></dd>
-                <dd><a href="/gsfsx-2681974-0-0-0-1.html">北京</a></dd>
-                <dd><a href="/gsfsx-2681975-0-0-0-1.html">天津</a></dd>
-                <dd><a href="/gsfsx-2681976-0-0-0-1.html">河北</a></dd>
-                <dd><a href="/gsfsx-2681977-0-0-0-1.html">河南</a></dd>
-                <dd><a href="/gsfsx-2681978-0-0-0-1.html">山东</a></dd>
-                <dd><a href="/gsfsx-2681979-0-0-0-1.html">山西</a></dd>
-                <dd><a href="/gsfsx-2681980-0-0-0-1.html">陕西</a></dd>
-                <dd><a href="/gsfsx-2681981-0-0-0-1.html">内蒙古</a></dd>
-                <dd><a href="/gsfsx-2681982-0-0-0-1.html">辽宁</a></dd>
-                <dd><a href="/gsfsx-2681983-0-0-0-1.html">吉林</a></dd>
-                <dd><a href="/gsfsx-2681984-0-0-0-1.html">黑龙江</a></dd>
-                <dd><a href="/gsfsx-2681985-0-0-0-1.html">上海</a></dd>
-                <dd><a href="/gsfsx-2681986-0-0-0-1.html">江苏</a></dd>
-                <dd><a href="/gsfsx-2681987-0-0-0-1.html">安徽</a></dd>
-                <dd><a href="/gsfsx-2681988-0-0-0-1.html">江西</a></dd>
-                <dd><a href="/gsfsx-2681989-0-0-0-1.html">湖北</a></dd>
-                <dd><a href="/gsfsx-2681990-0-0-0-1.html">湖南</a></dd>
-                <dd><a href="/gsfsx-2681991-0-0-0-1.html">重庆</a></dd>
-                <dd><a href="/gsfsx-2681992-0-0-0-1.html">四川</a></dd>
-                <dd><a href="/gsfsx-2681993-0-0-0-1.html">贵州</a></dd>
-                <dd><a href="/gsfsx-2681994-0-0-0-1.html">云南</a></dd>
-                <dd><a href="/gsfsx-2681995-0-0-0-1.html">广东</a></dd>
-                <dd><a href="/gsfsx-2681996-0-0-0-1.html">广西</a></dd>
-                <dd><a href="/gsfsx-2681997-0-0-0-1.html">福建</a></dd>
-                <dd><a href="/gsfsx-2681998-0-0-0-1.html">甘肃</a></dd>
-                <dd><a href="/gsfsx-2681999-0-0-0-1.html">宁夏</a></dd>
-                <dd><a href="/gsfsx-2682000-0-0-0-1.html">新疆</a></dd>
-                <dd><a href="/gsfsx-2682001-0-0-0-1.html">西藏</a></dd>
-                <dd><a href="/gsfsx-2682002-0-0-0-1.html">海南</a></dd>
-                <dd><a href="/gsfsx-2682003-0-0-0-1.html">浙江</a></dd>
-                <dd><a href="/gsfsx-2682004-0-0-0-1.html">青海</a></dd>
+                <dd class="select-all selected"><a href="">全部</a></dd>
+                <dd><a th:each="pro :${province}"
+                       th:text="${pro}"
+                       th:href="@{/scoreline(location=${pro})}"></a></dd>
             </dl>
         </li>
         <li class="select-list">
             <dl id="select2">
                 <dt>年份：</dt>
                 <dd class="select-all selected"><a href="/gsfsx-0-0-0-0-1.html">全部</a></dd>
-                <dd><a href="/gsfsx-0-2020-0-0-1.html">2020</a></dd>
-                <dd><a href="/gsfsx-0-2019-0-0-1.html">2019</a></dd>
-                <dd><a href="/gsfsx-0-2018-0-0-1.html">2018</a></dd>
-                <dd><a href="/gsfsx-0-2017-0-0-1.html">2017</a></dd>
-                <dd><a href="/gsfsx-0-2016-0-0-1.html">2016</a></dd>
-                <dd><a href="/gsfsx-0-2015-0-0-1.html">2015</a></dd>
-                <dd><a href="/gsfsx-0-2014-0-0-1.html">2014</a></dd>
-                <dd><a href="/gsfsx-0-2013-0-0-1.html">2013</a></dd>
-                <dd><a href="/gsfsx-0-2012-0-0-1.html">2012</a></dd>
-                <dd><a href="/gsfsx-0-2011-0-0-1.html">2011</a></dd>
-                <dd><a href="/gsfsx-0-2010-0-0-1.html">2010</a></dd>
+                <dd><a th:each="year1 :${year}"
+                       th:text="${year1}"
+                       th:href="@{/scoreline(year=${year1})}">2020</a></dd>
             </dl>
         </li>
         <li class="select-list">
             <dl id="select3">
                 <dt>类别：</dt>
                 <dd class="select-all selected"><a href="/gsfsx-0-0-0-0-1.html">全部</a></dd>
-                <dd><a href="/gsfsx-0-0-2682005-0-1.html">文科</a></dd>
-                <dd><a href="/gsfsx-0-0-2682006-0-1.html">理科</a></dd>
-                <dd><a href="/gsfsx-0-0-2682007-0-1.html">不分文理</a></dd>
+                <dd><a th:each="lb :${leibie}"
+                       th:text="${lb}"
+                       th:href="@{/scoreline(leibie=${lb})}"></a></dd>
             </dl>
         </li>
         <li class="select-list">
             <dl id="select4">
                 <dt>批次：</dt>
                 <dd class="select-all selected"><a href="/gsfsx-0-0-0-0-1.html">全部</a></dd>
-                <dd><a href="/gsfsx-0-0-0-2682202-1.html">本科批</a></dd>
-                <dd><a href="/gsfsx-0-0-0-2682009-1.html">本科一批</a></dd>
-                <dd><a href="/gsfsx-0-0-0-2682010-1.html">本科二批</a></dd>
-                <dd><a href="/gsfsx-0-0-0-2682011-1.html">本科三批</a></dd>
-                <dd><a href="/gsfsx-0-0-0-2682203-1.html">专科批</a></dd>
-                <dd><a href="/gsfsx-0-0-0-2682012-1.html">专科一批</a></dd>
-                <dd><a href="/gsfsx-0-0-0-2682013-1.html">专科二批</a></dd>
+                <dd><a th:each="pc :${pici}"
+                       th:text="${pc}"
+                       th:href="@{/scoreline(pici=${pc})}">本科批</a></dd>
             </dl>
         </li>
     </ul>

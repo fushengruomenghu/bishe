@@ -3,6 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <link th:href="@{css/bootstrap.min.css}" type="text/css" rel="stylesheet">
+    <link th:href="@{css/font-awesome.min.css}" type="text/javascript" rel="stylesheet">
+    <link th:href="@{css/bootsnav.css}" type="text/css" rel="stylesheet">
+    <link th:href="@{css/normalize.css}" type="text/css" rel="stylesheet">
+    <link th:href="@{css/css.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{js/jquery-1.11.0.min.js}" type="text/javascript"></script>
+    <script th:src="@{js/bootstrap.min.js}" type="text/javascript"></script>
+    <script th:src="@{js/bootsnav.js}" type="text/javascript"></script>
+    <script th:src="@{js/jquery.js}" type="text/javascript"></script>
     <link th:href="@{css/head.css}" type="text/css" rel="stylesheet"/>
     <script th:src="@{js/jquery-1.11.0.min.js}" type="text/javascript"></script>
     <link th:href="@{css/style.css}" type="text/css" rel="stylesheet">
@@ -31,7 +41,7 @@
                 <li><a th:href="@{/schoolInfo}">学校信息</a></li>
                 <li><a th:href="@{/scoreline}">历年分数线</a></li>
                 <li><a th:href="@{/professioninfo}">专业</a></li>
-                <li><a href="#">推荐</a></li>
+                <li><a th:href="@{/Recommend}">推荐</a></li>
             </ul>
             <div id="fade" class="black_overlay"></div>
             <!-- 编辑框 可以加自己的样式 -->
@@ -50,10 +60,7 @@
             </div>
 
             <script type="text/javascript">
-                // $(".logout").click(function () {
-                //     sessionStorage.clear();
-                //     window.location.href = "redirect:/";
-                // });
+
                 $("#info").click(function() {
                     document.getElementById("MyDiv").style.display = 'block';
                     document.getElementById("fade").style.display = 'block';

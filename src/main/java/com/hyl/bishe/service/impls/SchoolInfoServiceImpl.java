@@ -1,13 +1,12 @@
 package com.hyl.bishe.service.impls;
 
 import com.hyl.bishe.dao.SchoolInfoDao;
+import com.hyl.bishe.dao.UniversityDao;
 import com.hyl.bishe.entity.SchoolInfo;
+import com.hyl.bishe.entity.University;
 import com.hyl.bishe.service.SchoolInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,16 +15,49 @@ import java.util.List;
 public class SchoolInfoServiceImpl implements SchoolInfoService {
     @Autowired
     private SchoolInfoDao schoolInfoDao;
+    @Autowired
+    private UniversityDao universityDao;
 
-    public SchoolInfo findAllbyId(Integer id){
+    public SchoolInfo findAllById(Integer id){
         return schoolInfoDao.findAllById(id);
     }
-    public SchoolInfo findAllbyName(String name){
+    public University findAllByName(String name){
+        return universityDao.findAllByName(name);
+    }
+
+    public SchoolInfo findByName(String name){
         return schoolInfoDao.findSchoolInfoBySchname(name);
     }
 
-    @Override
+
+    public List<SchoolInfo> findAll() {
+        return schoolInfoDao.findAll();
+    }
+
     public Page<SchoolInfo> findAll(Pageable Page) {
         return schoolInfoDao.findAll(Page);
+    }
+    public List<SchoolInfo> findbyType(String type){return schoolInfoDao.findSchoolInfoByType(type);}
+//    public List<SchoolInfo> findbyEducation_level(String level){return schoolInfoDao.findSchoolInfosByEducation_level(level);}
+    public List<SchoolInfo> findbyLocation(String location){return schoolInfoDao.findSchoolInfosByLocation(location);}
+
+    @Override
+    public Page<SchoolInfo> findAll(Example example, Pageable Page) {
+        return null;
+    }
+
+    @Override
+    public List<String> findLocation() {
+        return schoolInfoDao.findDistinctLocation();
+    }
+
+    @Override
+    public List<String> findType() {
+        return schoolInfoDao.findDistinctType();
+    }
+
+    @Override
+    public List<String> findLevel() {
+        return schoolInfoDao.findDistinctLevel();
     }
 }

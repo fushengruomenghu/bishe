@@ -31,6 +31,7 @@ public class SchoolInfo {
     @Column
     String life;
 
+
     public SchoolInfo(Integer id, String schname, String location, String belonged, String type, String education_level, String yiliudaxue, String yiliuxueke, String graduate_school, String comprehensive, String environment, String life) {
         this.id = id;
         this.schname = schname;
