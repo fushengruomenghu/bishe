@@ -29,7 +29,7 @@
                         <dd class="select-all selected"><a href="">全部</a></dd>
                         <dd><a th:each="loca :${location}"
                                th:text="${loca}"
-                               th:href="@{/GetLocation(location=${loca})}"></a></dd>
+                               th:href="@{/schoolInfo(location=${loca})}"></a></dd>
                     </dl>
                 </li>
                 <li class="select-list">
@@ -38,7 +38,7 @@
                         <dd class="select-all selected"><a href="">全部</a></dd>
                         <dd><a th:each="lexin:${type}"
                                th:text="${lexin}"
-                               th:href="@{/GetType(type=${lexin})}"></a></dd>
+                               th:href="@{/schoolInfo(type=${lexin})}"></a></dd>
                     </dl>
                 </li>
                 <li class="select-list">
@@ -47,7 +47,7 @@
                         <dd class="select-all selected"><a href="">全部</a></dd>
                         <dd><a th:each="lev :${level}"
                                th:text="${lev}"
-                               th:href="@{/GetLevel(type=${lev})}"></a></dd>
+                               th:href="@{/schoolInfo(level=${lev})}"></a></dd>
                     </dl>
                 </li>
             </ul>

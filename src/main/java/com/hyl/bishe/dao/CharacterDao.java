@@ -1,6 +1,7 @@
 package com.hyl.bishe.dao;
 
 import com.hyl.bishe.entity.Character;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -20,4 +21,6 @@ public interface CharacterDao extends JpaRepository<Character,Integer> {
     List<Character> findCharactersByGradeBetweenAndLocationAndLeibie(int start,int end,String location,String leibie);
     @Query("SELECT DISTINCT location from characteristic ")
     List<String> findDistinctLocation();
+
+
 }

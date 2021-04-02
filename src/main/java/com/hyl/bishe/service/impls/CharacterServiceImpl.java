@@ -23,4 +23,6 @@ public class CharacterServiceImpl implements CharacterService {
     public List<String> findLocation() {
         return characterDao.findDistinctLocation();
     }
+    public void findAll(){
+    }
 }

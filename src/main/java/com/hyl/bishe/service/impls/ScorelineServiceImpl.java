@@ -6,6 +6,7 @@ import com.hyl.bishe.service.ScorelineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,8 +17,8 @@ public class ScorelineServiceImpl implements ScorelineService {
     private ScorelineDao scorelineDao;
 
     @Override
-    public Page<Scoreline> findAll(Pageable page) {
-        return scorelineDao.findAll(page);
+    public Page<Scoreline> findAll(Specification<Scoreline> scorelineSpecification, Pageable page) {
+        return scorelineDao.findAll(scorelineSpecification,page);
     }
 
     @Override

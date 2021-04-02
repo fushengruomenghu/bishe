@@ -2,11 +2,13 @@ package com.hyl.bishe.service.impls;
 
 import com.hyl.bishe.dao.SchoolInfoDao;
 import com.hyl.bishe.dao.UniversityDao;
+import com.hyl.bishe.entity.Profession;
 import com.hyl.bishe.entity.SchoolInfo;
 import com.hyl.bishe.entity.University;
 import com.hyl.bishe.service.SchoolInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,8 +36,8 @@ public class SchoolInfoServiceImpl implements SchoolInfoService {
         return schoolInfoDao.findAll();
     }
 
-    public Page<SchoolInfo> findAll(Pageable Page) {
-        return schoolInfoDao.findAll(Page);
+    public Page<SchoolInfo> findAll(Specification<SchoolInfo> schoolinfoSpecification, Pageable Page) {
+        return schoolInfoDao.findAll(schoolinfoSpecification,Page);
     }
     public List<SchoolInfo> findbyType(String type){return schoolInfoDao.findSchoolInfoByType(type);}
 //    public List<SchoolInfo> findbyEducation_level(String level){return schoolInfoDao.findSchoolInfosByEducation_level(level);}

@@ -20,6 +20,7 @@ public interface ProfessionDao extends JpaRepository<Profession,Integer> , JpaSp
     List<String> findDistinctDisciplines(String degree_category);
 
     Page<Profession> findAll(Specification<Profession> specification, Pageable pageable);
-
+    @Query(value = "select proname from pro_info where degree_category like ?1 or degree_category like ?2 or degree_category like ?3")
+    List<String> findProNameByDegreeCategory(String name1,String name2,String name3);
 
 }

@@ -8,10 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,29 +24,14 @@ public class ProfessionServiceImpl implements ProfessionService {
     @Autowired
     private ProfessionDao professionDao;
     @Override
-    public Page<Profession> findAll(Pageable page) {
-        return professionDao.findAll(page);
+    public Page<Profession> findAll(Specification<Profession> professionSpecification ,Pageable page) {
+        return professionDao.findAll(professionSpecification,page);
     }
 
     public List<Profession> findAll() {
         return professionDao.findAll();
     }
 
-    @Override
-    public Page<Profession> findByCondition(Integer page, Integer size, String disciplines, String pro_category) {
-        Pageable pageable = PageRequest.of(page, size);
-
-        return professionDao.findAll((root, criteriaQuery, criteriaBuilder) -> {
-            List<Predicate> predicates=new ArrayList<>();
-            if (disciplines!=null) {
-                predicates.add(criteriaBuilder.equal(root.get("disciplines"),disciplines));
-            }
-            if (pro_category!=null) {
-                predicates.add(criteriaBuilder.equal(root.get("pro_category"),pro_category));
-            }
-            return criteriaQuery.where(predicates.toArray(new Predicate[predicates.size()])).getRestriction();
-        },pageable);
-    }
 
     @Override
     public List<String> findMenglei(String menglei) {
@@ -53,5 +42,8 @@ public class ProfessionServiceImpl implements ProfessionService {
         return professionDao.findProfessionByProname(name);
     }
 
+   public List<String> findProNameByDegreeCategory(String str1,String str2,String str3){
+        return professionDao.findProNameByDegreeCategory(str1,str2,str3);
+    }
     
 }

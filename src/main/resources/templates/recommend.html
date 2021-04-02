@@ -29,6 +29,7 @@
                         "grade": $("#grade").val(),
                         "course1": $("#course1").val(),
                         "course2": $("#course2").val(),
+                        "course3": $("#course3").val(),
                     },
                     success: function (data) {
                         $("#tbody").empty();
@@ -67,10 +68,16 @@
         </select>
         <select name="postdb[course1]" id="course1" class="gfxdx_kelei index_input">
             <option value="">选择偏好科目一</option>
+            <option value="语文">语文</option>
+            <option value="英语">英语</option>
+            <option value="数学">数学</option>
+        </select>
+        <select name="postdb[course2]" id="course2" class="gfxdx_kelei index_input">
+            <option value="">选择偏好科目一</option>
             <option value="物理">物理</option>
             <option value="历史">历史</option>
         </select>
-        <select name="postdb[course2]" id="course2" class="gfxdx_kelei index_input">
+        <select name="postdb[course3]" id="course3" class="gfxdx_kelei index_input">
             <option value="">选择偏好科目二</option>
             <option value="物理">生物</option>
             <option value="化学">化学</option>
@@ -86,10 +93,10 @@
     <table width="50%" border="0" cellpadding="0" cellspacing="1" class="bgddd">
         <thead >
         <tr  align="center" class="tb_title">
-            <th>序号</th>
-            <th>推荐学校</th>
-            <th>推荐专业</th>
-            <th></th>
+            <th align="center">序号</th>
+            <th align="center">推荐学校</th>
+            <th align="center">推荐专业</th>
+            <th align="center"></th>
         </tr>
         </thead>
         <tbody id="tbody">

@@ -79,8 +79,11 @@ class BisheApplicationTests {
 
     @Test
     void findall(){
-      List<Character> characterList=  characterDao.findCharactersByGradeBetweenAndLocationAndLeibie(560,600,"北京","理科");
 
+//      List<Character> characterList=  characterDao.findCharactersByGradeBetweenAndLocationAndLeibie(560,600,"北京","理科");
+
+        List<String> list=professionDao.findProNameByDegreeCategory("%文学%","%语言%","%新闻%");
+        System.out.println(list);
     }
 
     @Test
