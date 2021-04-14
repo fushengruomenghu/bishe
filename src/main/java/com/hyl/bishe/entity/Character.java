@@ -1,37 +1,82 @@
 package com.hyl.bishe.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import javax.persistence.*;
 
 @Entity(name = "characteristic")
 public class Character {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Integer id;
-    @Column
-    String grade;
-    @Column
-    String province;
-    @Column
-    String location;
-    @Column
-    String leibie;
-    @Column
-    String batch;
-    @Column
-    String college;
-    @Column
-    String majorname;
+    private Integer id;
 
-    public Character(Integer id, String grade, String province, String location, String leibie, String batch, String college, String majorname) {
-        this.id = id;
-        this.grade = grade;
-        this.province = province;
-        this.location = location;
-        this.leibie = leibie;
-        this.batch = batch;
-        this.college = college;
-        this.majorname = majorname;
+    @Column
+    private String grade;
+
+    @Column
+    private String province;
+
+    @Column
+    private String location;
+
+    @Column
+    private String leibie;
+
+    @Column
+    private String batch;
+
+    @Column
+    private String college;
+
+    @Column
+    private String majorname;
+
+
+    private Integer sid;
+
+    private Integer pid;
+
+    public Integer getSid() {
+        return sid;
     }
+
+    public void setSid(Integer sid) {
+        this.sid = sid;
+    }
+
+    public Integer getPid() {
+        return pid;
+    }
+
+    public void setPid(Integer pid) {
+        this.pid = pid;
+    }
+    //
+//
+//    @ManyToOne(fetch=FetchType.EAGER,targetEntity=SchoolInfo.class,cascade=CascadeType.ALL,optional = false)
+//    @JoinColumn(name="sid",referencedColumnName="id",unique = true)
+//    private SchoolInfo schoolInfo;
+//    @ManyToOne(fetch=FetchType.LAZY,targetEntity=Profession.class,cascade=CascadeType.ALL,optional = false)
+//    @JoinColumn(name="pid",referencedColumnName="id",unique = true)
+//    private Profession profession;
+
+//    public SchoolInfo getSchoolInfo() {
+//        return schoolInfo;
+//    }
+//
+//    public void setSchoolInfo(SchoolInfo schoolInfo) {
+//        this.schoolInfo = schoolInfo;
+//    }
+//
+//    public Profession getProfession() {
+//        return profession;
+//    }
+//
+//    public void setProfession(Profession profession) {
+//        this.profession = profession;
+//    }
+
 
     public Character() {
 

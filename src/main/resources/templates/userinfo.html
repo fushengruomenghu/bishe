@@ -1,20 +1,12 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+    <title>登陆</title>
+        </head>
 <body>
-<form th:action="@{/updateUserInfo}">
-    学生姓名：<input type="text" name="u_name" th:value="${session.Users.getUsername()}"  />&nbsp;&nbsp;
-    联系方式：<input type="text" name="u_phone" th:value="${session.Users.getPhone()}"  />&nbsp;&nbsp;
-    性&nbsp;&nbsp;别：<input type="text" name="u_sex" th:value="${session.Users.getSex().equals('0') ?'男':'女'}" />&nbsp;&nbsp;
-    生源&nbsp;地：<input type="text" name="u_location" th:value="${session.Users.getLocation()}" /><br>
-    文科/理科：<input type="text" name="u_leibie" th:value="${session.Users.getLeibie().equals('0') ?'文科':'理科'}"  />&nbsp;&nbsp;
-    分&nbsp;&nbsp;数：<input type="text" name="u_grade" th:value="${session.Users.getGrade()}" />&nbsp;&nbsp;
-    批&nbsp;&nbsp;次：<input type="text" name="u_pici" th:value="${session.Users.getPici().equals('0') ?'本科第一批次':'本科第二批次'}" placeholder="本科第一批次"/>&nbsp;&nbsp;
-    爱&nbsp;&nbsp;好：<input type="text" name="u_hobby" th:value="${session.Users.getHobby()}" /><br>
-    <input type="submit" value="修改">
-</form>
+MBTI职业性格测试 www.zxgj.cn/g/mbti28
+
+霍兰德职业兴趣测试 www.zxgj.cn/g/holland2
 </body>
+
 </html>

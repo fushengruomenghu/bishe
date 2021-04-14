@@ -22,6 +22,8 @@ import javax.persistence.criteria.Root;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +49,7 @@ public class SchoolInfoControllerImpl implements SchoolInfoController {
         if (pageNum == null) {
             pageNum=1;
         }
-        Sort sort=Sort.by(Sort.Direction.ASC,"id");
+        Sort sort=Sort.by(Sort.Direction.ASC,"location");
         Pageable pageable=PageRequest.of(pageNum-1,25,sort);
         Specification<SchoolInfo> specification=new Specification<SchoolInfo>() {
             @Override
@@ -81,8 +83,10 @@ public class SchoolInfoControllerImpl implements SchoolInfoController {
         String schoolname=request.getParameter("name");
         System.out.println(schoolname);
         University university =schoolInfoService.findAllByName(schoolname);
-
+        university.setSchWebsite(university.getSchWebsite().replaceAll("\\u00A0+", ""));
+        university.setEnrollmentWebsite(university.getEnrollmentWebsite().replaceAll("\\u00A0+", ""));
         session.setAttribute("university", university);
+
         return "schooldetails";
     }
 }

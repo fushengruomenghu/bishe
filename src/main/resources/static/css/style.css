@@ -193,7 +193,7 @@ hs{padding:2px 5px; margin-right:10px; background:#ddd; color:#333; border-radiu
 .index-search-box i{position:absolute;left:10px;top:10px;font-size: 18px;color: #888;}
 
 /*涓€瀵逛竴鏈嶅姟*/
-.index_ydy2{background: url("ydybg.jpg") no-repeat center center;background-size: auto 100%;}
+.index_ydy2{background: url("images/iconfont-duanxin.png") no-repeat center center;background-size: auto 100%;}
 .index_ydy{padding:30px 0;background: rgba(0,0,0,0.2);}
 .ydy-color .keng,.index_ydy .btn{background:#39f;}
 .ydy-slide {background:none;}
@@ -657,7 +657,7 @@ hs{padding:2px 5px; margin-right:10px; background:#ddd; color:#333; border-radiu
 .cpjs{line-height:26px;}
 .cpjs .title{font-size:26px; line-height:30px; margin-bottom:30px;}
 .cpjs .title span{font-size:16px;color:red;}
-.btn{height: 50px;width: 155px;font-size: 20px;background: #ff6c00;font-weight: 500;color: #fff;border: none; padding: 3px 10px; border-radius: 5px; cursor: pointer;margin-right:30px;}
+.btn{height: 30px;width: 110px;font-size: 20px;background: #ff6c00;font-weight: 500;color: #fff;border: none; padding: 3px 10px; border-radius: 5px; cursor: pointer;margin-right:30px;}
 @media screen and (max-width: 600px){
     .chanpin{margin-top:0px;}
     .cpt{float:left;width:100%;height:auto;overflow:hidden;margin-bottom:20px;}
@@ -744,9 +744,9 @@ hs{padding:2px 5px; margin-right:10px; background:#ddd; color:#333; border-radiu
 .gfxdx_tb{width:100%;}
 .gfxdx_title{margin:20px 0; font-size:22px; font-weight:bold; text-align:center;}
 .gfxdx_shengfen,.gfxdx_kelei,.gfxdx_pici,.gfxdx_fenshu,.gfxdx_zhuanye{border-bottom:2px solid #333;border-top:0;border-left:0;border-right:0;font-size:16px;font-family: "寰蒋闆呴粦";width:10%; float:left;margin-right:1%;height:30px;padding:0 1%}
-.gfxdx_shengfen,.gfxdx_fenshu{border-bottom:2px solid #333;border-top:0;border-left:0;border-right:0;font-size:16px;font-family: "寰蒋闆呴粦";width:10%; float:left;margin-right:1%;height:30px;padding:0 1%}
+.gfxdx_shengfen,.gfxdx_fenshu{border-bottom:2px solid #333;border-top:0;border-left:0;border-right:0;font-size:16px;font-family: "寰蒋闆呴粦";width:12%; float:left;margin-right:1%;height:30px;padding:0 1%}
 .index_input{border-bottom:0 !important;border-radius:5px;}
-.gfxdx_btn{border:0;font-size:16px;font-family: "寰蒋闆呴粦";width:16%; text-align:center; float:left;background:#f60;color:#fff;line-height:30px;border-radius:5px;}
+.gfxdx_btn{border:0;font-size:16px;font-family: "寰蒋闆呴粦";width:10%; text-align:center; float:left;background:#f60;color:#fff;line-height:30px;border-radius:5px;}
 @media screen and (max-width: 600px){
     .gfxdx{padding:50px 0;}
     .gfxdx_h1{font-size:25px;margin-bottom:30px;}

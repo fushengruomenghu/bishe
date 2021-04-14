@@ -29,6 +29,13 @@ public class UsersServiceImpl implements UsersService {
     public List<Users> findAllUsers() {
         return usersDao.findAll();
     }
+
+    @Override
+    public void updateUserById(Users users, Integer id) {
+        usersDao.updateUserById(users.getUsername(),users.getSex(),users.getPhone(),users.getLocation(),users.getPici(),users.getGrade(),users.getLeibie(),users.getHobby(),id);
+    }
+
+
     public Users findUserByPhone(String phone){
         return usersDao.findAllByPhone(phone);
     }

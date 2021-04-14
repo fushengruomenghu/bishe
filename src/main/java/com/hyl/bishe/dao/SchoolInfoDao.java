@@ -1,5 +1,6 @@
 package com.hyl.bishe.dao;
 
+import com.hyl.bishe.entity.Character;
 import com.hyl.bishe.entity.Profession;
 import com.hyl.bishe.entity.SchoolInfo;
 import org.springframework.data.domain.Page;
@@ -26,4 +27,7 @@ public interface SchoolInfoDao extends JpaRepository<SchoolInfo,Integer> , JpaSp
     List<String> findDistinctLevel();
 
     Page<SchoolInfo> findAll(Specification<SchoolInfo> schoolInfoSpecification, Pageable page);
+//    @Query("select s from schoolinfo s where s.")
+//    List<SchoolInfo> findSchoolInfoByCharactercollege(String college);
 }
+

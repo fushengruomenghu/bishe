@@ -46,6 +46,8 @@ public class ProfessionControllerImpl implements ProfessionController {
         model.addAttribute("color2","background-color: #ff8f8f");
         String pro_category=request.getParameter("pro_category");
         String disciplines=request.getParameter("disciplines");
+//        pro_category="本科专业";
+//        disciplines="理学";
         if (pageNum == null) {
             pageNum=1;
         }

@@ -15,16 +15,16 @@ public class BisheApplication {
         System.out.println("欢迎使用");
     }
 //    @EventListener({ApplicationReadyEvent.class})
-//    void applicationReadyEvent() {
-//        System.out.println("应用已经准备就绪 ... 启动浏览器");
-//        String url = "http://localhost:8081/";
-//        Runtime runtime = Runtime.getRuntime();
-//        try {
-//            runtime.exec("rundll32 url.dll,FileProtocolHandler " + url);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    void applicationReadyEvent() {
+        System.out.println("应用已经准备就绪 ... 启动浏览器");
+        String url = "http://localhost:8081/";
+        Runtime runtime = Runtime.getRuntime();
+        try {
+            runtime.exec("rundll32 url.dll,FileProtocolHandler " + url);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 //    /**
 //     * 获取当前机器的端口号
 //     *

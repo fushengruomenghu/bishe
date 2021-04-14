@@ -2,14 +2,14 @@ package com.hyl.bishe;
 
 import com.hyl.bishe.controller.Impls.PersonControllerImpls;
 import com.hyl.bishe.dao.*;
+import com.hyl.bishe.entity.*;
 import com.hyl.bishe.entity.Character;
-import com.hyl.bishe.entity.Person;
-import com.hyl.bishe.entity.SchoolInfo;
-import com.hyl.bishe.entity.University;
+import com.hyl.bishe.entity.CharacterAndSchoolInfo;
 import com.hyl.bishe.service.impls.PersonServiceImpls;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -66,9 +66,17 @@ class BisheApplicationTests {
 
     }
     @Test
+    @Transactional
     void findbyname(){
-       University university=universityDao.findAllByName("北京大学");
-        System.out.println(university.getSchWebsite());
+//       University university=universityDao.findAllByName("北京大学");
+//        System.out.println(university.getSchWebsite());
+
+//        List<Character> characterList =characterDao.findCharacterByCollege("天津大学");
+//        SchoolInfo schoolInfo=characterList.get(1).getSchoolInfo();
+//        System.out.println(schoolInfo.toString());
+//       Profession profession=professionDao.findProfessionByProname("英语");
+//        System.out.println(profession.getCharacters());
+
     }
 
     @Autowired
@@ -78,12 +86,16 @@ class BisheApplicationTests {
     private SchoolInfoDao schoolInfoDao;
 
     @Test
-    void findall(){
+    void findall() throws NoSuchFieldException {
 
 //      List<Character> characterList=  characterDao.findCharactersByGradeBetweenAndLocationAndLeibie(560,600,"北京","理科");
 
-        List<String> list=professionDao.findProNameByDegreeCategory("%文学%","%语言%","%新闻%");
-        System.out.println(list);
+//        List<String> list=professionDao.findProNameByDegreeCategory("%文学%","%语言%","%新闻%");
+//       List<CharacterAndSchoolInfo> list=characterDao.findCharacterAndSchoolInfo("560","600","北京","理科");
+//
+//        List<CharacterAndSchoolInfo> list1=characterDao.findCharacterAndSchool("560","600");
+
+//        System.out.println(list1.get(1));
     }
 
     @Test

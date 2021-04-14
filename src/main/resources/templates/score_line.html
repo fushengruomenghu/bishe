@@ -19,15 +19,15 @@
 
 </head>
 <body>
-<div class="header-main">
-    <div id="head" th:include="public/head :: common_head"></div>
-</div>
+<!--<div class="header-main">-->
+<!--    <div id="head" th:include="public/head :: common_head"></div>-->
+<!--</div>-->
 <div class="wrap">
     <ul class="select">
         <li class="select-list">
             <dl id="select1">
                 <dt>省份：</dt>
-                <dd class="select-all selected"><a href="">全部</a></dd>
+                <dd class="select-all selected"><a >全部</a></dd>
                 <dd><a th:each="pro :${province}"
                        th:text="${pro}"
                        th:href="@{/scoreline(location=${pro})}"></a></dd>
@@ -36,7 +36,7 @@
         <li class="select-list">
             <dl id="select2">
                 <dt>年份：</dt>
-                <dd class="select-all selected"><a href="/gsfsx-0-0-0-0-1.html">全部</a></dd>
+                <dd class="select-all selected"><a >全部</a></dd>
                 <dd><a th:each="year1 :${year}"
                        th:text="${year1}"
                        th:href="@{/scoreline(year=${year1})}">2020</a></dd>
@@ -45,7 +45,7 @@
         <li class="select-list">
             <dl id="select3">
                 <dt>类别：</dt>
-                <dd class="select-all selected"><a href="/gsfsx-0-0-0-0-1.html">全部</a></dd>
+                <dd class="select-all selected"><a >全部</a></dd>
                 <dd><a th:each="lb :${leibie}"
                        th:text="${lb}"
                        th:href="@{/scoreline(leibie=${lb})}"></a></dd>
@@ -54,7 +54,7 @@
         <li class="select-list">
             <dl id="select4">
                 <dt>批次：</dt>
-                <dd class="select-all selected"><a href="/gsfsx-0-0-0-0-1.html">全部</a></dd>
+                <dd class="select-all selected"><a>全部</a></dd>
                 <dd><a th:each="pc :${pici}"
                        th:text="${pc}"
                        th:href="@{/scoreline(pici=${pc})}">本科批</a></dd>

@@ -9,4 +9,6 @@ public interface UsersService {
     Page<Users> getUserList(int pageNum, int pageSize);
     List<Users> findAllUsers();
 
+    void updateUserById(Users users,Integer id);
+
 }

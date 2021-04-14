@@ -18,9 +18,12 @@ spring:
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
-  devtools:
-    restart:
-      additional-paths: resources/**,static/**,templates/**
+    mode: HTML5
+    encoding: utf-8
+    cache: false
+#  devtools:
+#    restart:
+#      additional-paths: resources/**,static/**,templates/**
 logging:
   charset:
     console: utf-8

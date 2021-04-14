@@ -1,6 +1,8 @@
 package com.hyl.bishe.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "pro_info")
 public class Profession {
@@ -23,9 +25,40 @@ public class Profession {
     String degree;
     @Column
     String years;
+    @Column
+    String mbti;
+    @Column
+    String holland;
 
+//    @OneToMany(fetch=FetchType.EAGER,targetEntity=Character.class,mappedBy="profession",cascade = CascadeType.ALL)
+//    private List<Character> characters=new ArrayList<>();
     public Profession() {
 
+    }
+//
+//    public List<Character> getCharacters() {
+//        return characters;
+//    }
+//
+//    public void setCharacters(List<Character> characters) {
+//        this.characters = characters;
+//    }
+
+
+    public String getMbti() {
+        return mbti;
+    }
+
+    public void setMbti(String mbti) {
+        this.mbti = mbti;
+    }
+
+    public String getHolland() {
+        return holland;
+    }
+
+    public void setHolland(String holland) {
+        this.holland = holland;
     }
 
     public String getDisciplines() {
@@ -36,17 +69,7 @@ public class Profession {
         this.disciplines = disciplines;
     }
 
-    public Profession(Integer id, String ranks, String proname, String degree_category, String pro_category, String disciplines, String pro_code, String degree, String years) {
-        this.id = id;
-        this.ranks = ranks;
-        this.proname = proname;
-        this.degree_category = degree_category;
-        this.pro_category = pro_category;
-        this.disciplines = disciplines;
-        this.pro_code = pro_code;
-        this.degree = degree;
-        this.years = years;
-    }
+
 
     public String getPro_code() {
         return pro_code;

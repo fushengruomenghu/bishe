@@ -42,4 +42,9 @@ public class PersonServiceImpls implements PersonService {
     public void deletePerson(Person person) {
         personDao.delete(person);
     }
+
+   public void updatepassword(String password,String phone){
+        personDao.updatepassword(password,phone);
+    }
+
 }

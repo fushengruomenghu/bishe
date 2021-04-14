@@ -27,6 +27,7 @@ public class SchoolInfoServiceImpl implements SchoolInfoService {
         return universityDao.findAllByName(name);
     }
 
+
     public SchoolInfo findByName(String name){
         return schoolInfoDao.findSchoolInfoBySchname(name);
     }

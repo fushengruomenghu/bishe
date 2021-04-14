@@ -1,8 +1,6 @@
 package com.hyl.bishe.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity(name = "university")
 public class University {
@@ -35,6 +33,8 @@ public class University {
     @Column
     String enrollmentWebsite;
 
+    @OneToOne(fetch= FetchType.LAZY,targetEntity=SchoolInfo.class)
+    private SchoolInfo schoolInfo;
     public University() {
 
     }
@@ -151,7 +151,15 @@ public class University {
         this.enrollmentWebsite = enrollmentWebsite;
     }
 
-    public University(Integer id, String name, String degreeNum, String boshidian, String keySubjects, String keyLaboratory, String creationTime, String area, String xingzhi, String stuNum, String academicianNum, String telephone, String schWebsite, String enrollmentWebsite) {
+    public SchoolInfo getSchoolInfo() {
+        return schoolInfo;
+    }
+
+    public void setSchoolInfo(SchoolInfo schoolInfo) {
+        this.schoolInfo = schoolInfo;
+    }
+
+    public University(Integer id, String name, String degreeNum, String boshidian, String keySubjects, String keyLaboratory, String creationTime, String area, String xingzhi, String stuNum, String academicianNum, String telephone, String schWebsite, String enrollmentWebsite, SchoolInfo schoolInfo) {
         this.id = id;
         this.name = name;
         this.degreeNum = degreeNum;
@@ -166,5 +174,6 @@ public class University {
         this.telephone = telephone;
         this.schWebsite = schWebsite;
         this.enrollmentWebsite = enrollmentWebsite;
+        this.schoolInfo = schoolInfo;
     }
 }

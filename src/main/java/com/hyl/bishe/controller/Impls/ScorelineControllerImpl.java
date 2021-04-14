@@ -46,7 +46,7 @@ public class ScorelineControllerImpl implements ScorelineController {
         model.addAttribute("pici",picis);
         model.addAttribute("active1","active");
         model.addAttribute("color1","background-color: #ff8f8f");
-        String province=request.getParameter("province");
+        String province=request.getParameter("location");
         String leibie=request.getParameter("leibie");
         String pici=request.getParameter("pici");
         String year=request.getParameter("year");
@@ -62,7 +62,7 @@ public class ScorelineControllerImpl implements ScorelineController {
             public Predicate toPredicate(Root<Scoreline> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
                 List<Predicate> predicates=new ArrayList<>();
                 if (province!=null) {
-                    predicates.add(criteriaBuilder.equal(root.get("province"),province));
+                    predicates.add(criteriaBuilder.equal(root.get("location"),province));
                 }
                 if (leibie!=null) {
 
@@ -85,6 +85,6 @@ public class ScorelineControllerImpl implements ScorelineController {
         logger.info("pageNum==" + pageNum);
         model.addAttribute("score_line",list);
         response.addHeader("x-frame-options","SAMEORIGIN");
-        return "score_line";
+        return "score_line1";
     }
 }

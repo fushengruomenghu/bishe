@@ -1,8 +1,11 @@
 package com.hyl.bishe.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "schoolinfo")
 public class SchoolInfo {
@@ -24,28 +27,49 @@ public class SchoolInfo {
     String yiliuxueke;
     @Column
     String graduate_school;
+
     @Column
     String comprehensive;
+
     @Column
     String environment;
+
     @Column
     String life;
+//    @Transient
+//    private Integer uid;
+//
+//    public Integer getUid() {
+//        return uid;
+//    }
+//
+//    public void setUid(Integer uid) {
+//        this.uid = uid;
+//    }
+//
+//    @OneToOne(fetch= FetchType.EAGER,targetEntity=University.class)
+//    @JoinColumn(name="uid",referencedColumnName="id",unique = true)
+//    private University university;
+//
+//    @OneToMany(fetch=FetchType.LAZY,targetEntity=Character.class,mappedBy="schoolInfo",cascade = CascadeType.ALL)
+//    private List<Character> characters=new ArrayList<>();
 
-
-    public SchoolInfo(Integer id, String schname, String location, String belonged, String type, String education_level, String yiliudaxue, String yiliuxueke, String graduate_school, String comprehensive, String environment, String life) {
-        this.id = id;
-        this.schname = schname;
-        this.location = location;
-        this.belonged = belonged;
-        this.type = type;
-        this.education_level = education_level;
-        this.yiliudaxue = yiliudaxue;
-        this.yiliuxueke = yiliuxueke;
-        this.graduate_school = graduate_school;
-        this.comprehensive = comprehensive;
-        this.environment = environment;
-        this.life = life;
-    }
+//    public University getUniversity() {
+//        return university;
+//    }
+//
+//    public void setUniversity(University university) {
+//        this.university = university;
+//    }
+//
+//
+//    public List<Character> getCharacters() {
+//        return characters;
+//    }
+//
+//    public void setCharacters(List<Character> characters) {
+//        this.characters = characters;
+//    }
 
     public SchoolInfo() {
 

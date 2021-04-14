@@ -6,6 +6,8 @@ import com.hyl.bishe.service.impls.UsersServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -23,27 +25,19 @@ public class UsersControllerImpls implements UsersController {
     public String showUsersInfo() {
         return "userinfo";
     }
+
+    @ResponseBody
     @RequestMapping("/updateUserInfo")
-    public String updateUserInfo(HttpServletRequest request, HttpSession session){
-        String username=request.getParameter("u_name");
-        String sex=request.getParameter("u_sex");
-        String phone=request.getParameter("u_phone");
-        String location=request.getParameter("u_location");
-        String pici=request.getParameter("u_pici");
-        String grade=request.getParameter("u_grade");
-        String leibie=request.getParameter("u_leibie");
-        String hobby=request.getParameter("u_hobby");
+    public String updateUserInfo(@RequestParam(value = "u_name") String username,@RequestParam(value = "u_sex") String sex, @RequestParam(value = "u_phone") String phone,
+                                 @RequestParam(value = "u_location") String location, @RequestParam(value = "u_pici") String pici,@RequestParam(value = "u_grade") String grade, @RequestParam(value = "u_leibie") String leibie, @RequestParam(value = "u_hobby") String hobby
+            , HttpSession session){
+
+        System.out.println(username+","+sex+","+phone+","+location+","+grade+","+leibie+","+pici+","+hobby);
         Users users=usersService.findUserByPhone(phone);
         Integer id=users.getId();
-
-        usersService.deleteUser(users);
-        sex=sex.equals("男")?"0":"1";
-        leibie=leibie.equals("文科")?"0":"1";
-        pici=pici.equals("本科第一批次")?"0":"1";
         Users user=new Users(id,username,sex,phone,location,grade,leibie,pici,hobby);
         session.setAttribute("Users",user);
-        usersService.sava(user);
-        return "redirect:/schoolInfo";
+        usersService.updateUserById(user,id);
+        return "添加成功";
     }
-
 }

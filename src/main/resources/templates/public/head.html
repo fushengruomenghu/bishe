@@ -17,16 +17,13 @@
     <script th:src="@{js/jquery-1.11.0.min.js}" type="text/javascript"></script>
     <link th:href="@{css/style.css}" type="text/css" rel="stylesheet">
     <script th:src="@{js/clock.js}" type="text/javascript"></script>
+    <link th:href="@{/css/toastr.css}" rel="stylesheet" />
+    <script th:src="@{/js/toastr.min.js}"></script>
 
 </head>
 <body>
 <footer th:fragment="common_head">
         <nav class="navbar">
-            <script>
-                $(".searchBtn").click(function () {
-                    window.location.href='/GetSchoolInfo?name='+$(".searchIn").val();
-                });
-            </script>
             <div class="nav-info">
                 <div id="Clock" class="schoolinfo mt10" align="left" style="color: #dcd4d4"></div>
                 <a class="username" th:text="${session.Users.getUsername()}">admin</a>
@@ -36,9 +33,15 @@
             <div class="nav-search" style="background: url(/images/ab01.jpg)">
                 <div class="search-form" >
                     <input type="search" class="searchIn" placeholder="搜学校...">
-
                     <button class="searchBtn"><a >搜索</a></button>
-
+                    <script>
+                        $(".searchBtn").click(function () {
+                            window.location.href='/GetSchoolInfo?name='+$(".searchIn").val();
+                        });
+                        $("#info").click(function () {
+                            $('#myModal').modal();
+                        });
+                    </script>
                 </div >
 
             </div>
@@ -48,37 +51,95 @@
                 <li th:class="${active2}"><a th:style="${color2}" th:href="@{/professioninfo}">专业</a></li>
                 <li th:class="${active3}"><a th:style="${color3}" th:href="@{/Recommend}">推荐</a></li>
             </ul>
-            <div id="fade" class="black_overlay"></div>
-            <!-- 编辑框 可以加自己的样式 -->
-            <div id="MyDiv" class="white_content">
-                <form th:action="@{/updateUserInfo}">
-                    学生姓名：<input type="text" name="u_name" th:value="${session.Users.getUsername()}"  />&nbsp;&nbsp;
-                    联系方式：<input type="text" name="u_phone" th:value="${session.Users.getPhone()}"  />&nbsp;&nbsp;
-                    性&nbsp;&nbsp;别：<input type="text" name="u_sex" th:value="${session.Users.getSex().equals('0') ?'男':'女'}" />&nbsp;&nbsp;
-                    生源&nbsp;地：<input type="text" name="u_location" th:value="${session.Users.getLocation()}" /><br>
-                    文科/理科：<input type="text" name="u_leibie" th:value="${session.Users.getLeibie().equals('0') ?'文科':'理科'}"  />&nbsp;&nbsp;
-                    分&nbsp;&nbsp;数：<input type="text" name="u_grade" th:value="${session.Users.getGrade()}" />&nbsp;&nbsp;
-                    批&nbsp;&nbsp;次：<input type="text" name="u_pici" th:value="${session.Users.getPici().equals('0') ?'本科第一批次':'本科第二批次'}" placeholder="本科第一批次"/>&nbsp;&nbsp;
-                    爱&nbsp;&nbsp;好：<input type="text" name="u_hobby" th:value="${session.Users.getHobby()}" /><br>
-                        <input type="submit" value="修改">
-                </form>
-            </div>
 
-            <script type="text/javascript">
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
 
-                $("#info").click(function() {
-                    document.getElementById("MyDiv").style.display = 'block';
-                    document.getElementById("fade").style.display = 'block';
-                    var bgdiv = document.getElementById("fade");
-                    bgdiv.style.width = document.body.scrollWidth;
-                    $("#fade").height($(document).height());
-                });
-                //关闭弹出层
-                $("#fade").click(function() {
-                    document.getElementById("MyDiv").style.display = 'none';
-                    document.getElementById("fade").style.display = 'none';
-                });
-            </script>
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">用户信息</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="u_name">学生姓名</label>
+                                            <input type="text" name="u_name" class="form-control" id="u_name" placeholder="学生姓名" th:value="${session.Users.getUsername()}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="u_phone">联系方式</label>
+                                            <input type="text" name="u_phone" class="form-control" id="u_phone" placeholder="联系方式" th:value="${session.Users.getPhone()}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="u_sex">性&nbsp;&nbsp;别</label>
+                                            <select name="postdb[shengfen]" id="u_sex" class=" index_input">
+                                                <option th:text="${session.Users.getSex()}"></option>
+                                                <option value="男">男</option>
+                                                <option value="女">女</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="u_location">生源&nbsp;地</label>
+                                            <select name="postdb[shengfen]" id="u_location" class=" index_input">
+                                                <option th:value="${session.Users.getLocation()}" th:text="${session.Users.getLocation()}">选择生源地</option>
+                                                <option th:each="loc:${session.location}" th:value="${loc}" th:text="${loc}">
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="u_leibie">文科/理科</label>
+                                            <select name="postdb[leibie]" id="u_leibie" class=" index_input">
+                                                <option th:value="${session.Users.getLeibie()}" th:text="${session.Users.getLeibie()}">选择文理科</option>
+                                                <option th:each="leibie:${session.leibie}" th:value="${leibie}" th:text="${leibie}" value="1"></option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="u_grade">分&nbsp;&nbsp;数</label>
+                                            <input type="text" name="u_grade" class="form-control" id="u_grade" placeholder="分数" th:value="${session.Users.getGrade()}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="u_pici">批&nbsp;&nbsp;次</label>
+                                            <input type="text" name="u_pici" class="form-control" id="u_pici" placeholder="批次" th:value="${session.Users.getPici()}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="u_hobby">爱&nbsp;&nbsp;好</label>
+                                            <input type="text" name="u_hobby" class="form-control" id="u_hobby" placeholder="爱好" th:value="${session.Users.getHobby()}">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+                                        <button type="button" id="btn_submit" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
+                                    </div>
+                                    <script type="application/javascript">
+                                        $("#btn_submit").click(function () {
+                                            toastr.options.positionClass = 'toast-top-center';
+
+                                            $.ajax({
+                                                url: '/updateUserInfo',
+                                                type: "post",
+                                                async: true,
+                                                traditional: true,
+                                                data: {
+                                                    "u_location": $("#u_location").val(),
+                                                    "u_phone": $("#u_phone").val(),
+                                                    "u_grade": $("#u_grade").val(),
+                                                    "u_sex": $("#u_sex").val(),
+                                                    "u_hobby": $("#u_hobby").val(),
+                                                    "u_name": $("#u_name").val(),
+                                                    "u_leibie": $("#u_leibie").val(),
+                                                    "u_pici": $("#u_pici").val(),
+                                                },
+                                                success: function (result) {
+                                                    toastr.success(result.toString());
+                                                    // alert(result.toString());
+                                                    // location.reload();
+                                                }
+                                            })
+                                        });
+                                    </script>
+                                </div>
+                        </div>
+                    </div>
+
         </nav>
 </footer>
 </body>

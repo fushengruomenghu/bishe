@@ -10,11 +10,10 @@ import com.hyl.bishe.service.impls.ScorelineServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -35,9 +34,9 @@ public class RecommendControllerImpl {
     public String  Recommend(Model model){
         List<String> province= scorelineService.findProvince();
         List<String> location= characterService.findLocation();
-        List<String> pici= scorelineService.findpici();
+        List<String> leibie= scorelineService.findleibie();
         model.addAttribute("province",province);
-        model.addAttribute("pici",pici);
+        model.addAttribute("leibie",leibie);
         model.addAttribute("location",location);
         model.addAttribute("active3","active");
         model.addAttribute("color3","background-color: #ff8f8f");
@@ -46,20 +45,30 @@ public class RecommendControllerImpl {
 
 
     @ResponseBody
-    @RequestMapping("/doRecommend")
-    public List<Character> doRecommend(@RequestParam(value = "location") String location, @RequestParam(value = "province") String province,
-                                       @RequestParam(value = "leibie", defaultValue = "理科") String leibie, @RequestParam(value = "grade", defaultValue = "600") String grade,
-                                       @RequestParam(value = "course1") String course1, @RequestParam(value = "course2") String course2, @RequestParam(value = "course3") String course3){
-        int changji=Integer.parseInt(grade);
+    @RequestMapping(value = "/doRecommend")
+    public List<Character> doRecommend(@RequestParam(value = "location") String location, @RequestParam(value = "province") String province,@RequestParam(value = "graderange",defaultValue = "0") String graderange,
+                                       @RequestParam(value = "leibie") String leibie, @RequestParam(value = "grade", defaultValue = "600") String grade, @RequestParam String preference,
+                                       @RequestParam(value = "course1") String course1, @RequestParam(value = "course2") String course2, @RequestParam(value = "course3") String course3) {
 
-//        Profession profession=professionService.findbyName("");
-//        SchoolInfo schoolInfo=schoolInfoService.findByName("");
-        List<Profession> professionList= new ArrayList<>();
-        List<SchoolInfo> schoolInfoList= new ArrayList<>();
-        List<Character> characterList=characterService.findByGradeBetween(changji-5,changji+5,location,leibie);
-        characterList.removeIf(character -> character.getProvince().equals(province));
+        int changji = Integer.parseInt(grade);
+        int range = Integer.parseInt(graderange);
+        List<Character> characterList;
+        List<Profession> professionList=new ArrayList<>();
+        List<SchoolInfo> schoolInfoList=new ArrayList<>();
+        List<Character> characters=new ArrayList<>();
+        List<Character> characters1=new ArrayList<>();
 
-        List<String> list=new ArrayList<>();
+
+        
+        System.out.println(leibie+","+location);
+        if (province.equals("province")) {
+             characterList= characterService.findByGradeBetween(changji - range, changji + range, location, leibie);
+        }else {
+            characterList=characterService.findByCharacter(changji - range, changji + range, location, leibie,province);
+        }
+
+        List<String> list = new ArrayList<>();
+
         list.add(location);
         list.add(province);
         list.add(leibie);
@@ -68,37 +77,58 @@ public class RecommendControllerImpl {
         list.add(course2);
         list.add(course3);
         System.out.println(list);
-        for (int i = 0; i <list.size() ; i++) {
-            try {
-                write("test",list.get(i));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        characterList = reSimilarity(GetByAttribute(characterList, list));
+        for (Character character:characterList){
+            professionList.add(professionService.findbyName(character.getMajorname()));
         }
-        characterList=GetByAttribute(characterList,list);
-        //List<Character> characters=characterList.subList(0,10);
-//        for (Character character:characterList){
-//           professionList.add(professionService.findbyName(character.getMajorname()));
-//           schoolInfoList.add(schoolInfoService.findByName(character.getCollege()));
+        professionList.sort(Comparator.comparing(Profession::getRanks).reversed());
+        int i=0;
+        /**
+         * 根据专业排名过滤
+         */
+        while (i<characterList.size()){
+            for (Character character:characterList){
+                if (character.getMajorname().equals(professionList.get(i).getProname())) {
+                    characters.add(character);
+                }
+            }
+            i++;
+        }
+//        for (Character character:characters){
+//            schoolInfoList.add(schoolInfoService.findByName(character.getCollege()));
 //        }
-//        professionList.sort(Comparator.comparing(Profession::getRanks));
-//        schoolInfoList.sort(Comparator.comparing(SchoolInfo::getComprehensive).reversed());
-//        List<Profession> professions=professionList.subList(0,20);
-//        List<SchoolInfo> schoolInfos=schoolInfoList.subList(0,20);
-//        for (Character character:characterList){
-//            for (int i = 0; i < professions.size(); i++) {
-//                if (!character.getMajorname().equals(professions.get(i).getProname())) {
-//                    characterList.remove(character);
+//        if (preference != null) {
+//            if (preference.equals("environment")) {
+//                schoolInfoList.sort(Comparator.comparing(SchoolInfo::getEnvironment).reversed());
+//            }else if(preference.equals("comprehensive")){
+//                schoolInfoList.sort(Comparator.comparing(SchoolInfo::getComprehensive).reversed());
+//            }else {
+//                schoolInfoList.sort(Comparator.comparing(SchoolInfo::getLife).reversed());
+//            }
+//            for (Character character:characters){
+//                for (SchoolInfo schoolInfo:schoolInfoList){
+//                    if (character.getCollege().equals(schoolInfo.getSchname())) {
+//                        characters1.add(character);
+//                    }
 //                }
 //            }
-//            for (int i = 0; i < schoolInfos.size(); i++) {
-//                if(!character.getCollege().equals(schoolInfos.get(i).getSchname())){
-//                    characterList.remove(character);
+//        }
+//        for (int j = 0; j < characters1.size(); j++) {
+//            for (int k = j+1; k < characters1.size(); k++) {
+//                if (characters1.get(j).getId().equals(characters1.get(k).getId())) {
+//                    characterList.remove(characterList.get(k));
 //                }
 //            }
 //        }
-        characterList.sort(Comparator.comparing(Character::getGrade));
-        return characterList;
+//        if (characters1.size()>5) {
+//            for (int j=0;j<characters1.size();j++){
+//                if (j >5) {
+//                    characters1.remove(characters1.get(j));
+//                }
+//
+//            }
+//        }
+        return characters;
     }
     public List<Character> GetByAttribute(List<Character> characterList,List<String> attribute){
         List<Character> characters=new ArrayList<>();
@@ -153,25 +183,17 @@ public class RecommendControllerImpl {
         }
         return list1;
     }
-    public static void write(String file, String conent) throws IOException {
-        File file2 = new File(file);
-        if (!file2.exists()) {
-            file2.createNewFile();
-        }
-        BufferedWriter out = null;
-        try {
-            out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)));
-            out.write(conent + "\r\r");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                out.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+    public List<Character> reSimilarity(List<Character> characterList){
+        for (int i = 0; i < characterList.size(); i++) {
+            for (int j = i+1; j < characterList.size(); j++) {
+                if (characterList.get(i).getCollege().equals(characterList.get(j).getCollege())
+                        &&characterList.get(i).getMajorname().equals(characterList.get(j).getMajorname())
+                        &&characterList.get(i).getGrade().equals(characterList.get(j).getGrade())) {
+                    characterList.remove(characterList.get(j));
+                }
             }
         }
+        return characterList;
     }
 }
 

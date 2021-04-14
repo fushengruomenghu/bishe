@@ -22,85 +22,81 @@
             <div id="head" th:include="public/head :: common_head"></div>
         </div>
         <div class="wrap">
-            <ul class="select">
-                <li class="select-list">
-                    <dl id="select1">
-                        <dt>省份：</dt>
-                        <dd class="select-all selected"><a href="">全部</a></dd>
-                        <dd><a th:each="loca :${location}"
-                               th:text="${loca}"
-                               th:href="@{/schoolInfo(location=${loca})}"></a></dd>
-                    </dl>
-                </li>
-                <li class="select-list">
-                    <dl id="select2">
-                        <dt>类型：</dt>
-                        <dd class="select-all selected"><a href="">全部</a></dd>
-                        <dd><a th:each="lexin:${type}"
-                               th:text="${lexin}"
-                               th:href="@{/schoolInfo(type=${lexin})}"></a></dd>
-                    </dl>
-                </li>
-                <li class="select-list">
-                    <dl id="select3">
-                        <dt>层次：</dt>
-                        <dd class="select-all selected"><a href="">全部</a></dd>
-                        <dd><a th:each="lev :${level}"
-                               th:text="${lev}"
-                               th:href="@{/schoolInfo(level=${lev})}"></a></dd>
-                    </dl>
-                </li>
-            </ul>
-            <table width="100%" border="0" cellpadding="0" cellspacing="1" class="bgddd">
-                <tbody>
-                <tr align="center" class="tb_title">
-                    <th>序号</th>
-                    <th>院校名称</th>
-                    <th>院校所在地</th>
-                    <th>教育行政主管部门</th>
-                    <th>院校类型</th>
-                    <th>学历层次</th>
-                    <th>一流大学建设高校</th>
-                    <th>一流学科建设高校</th>
-                    <th>研究生院</th>
-                    <th>综合满意度</th>
-                    <th>院校环境满意度</th>
-                    <th>生活满意度</th>
-                    <th></th>
-                </tr>
-                <tr th:each="school : ${schoolInfos}" align="center" class="tb_content" id="a12654">
-                    <td th:text="${schoolStat.index+1}">序号</td>
-                    <td  ><a th:text="${school.getSchname()}"
-                             th:href="@{/GetSchoolInfo(name=${school.getSchname()})}"></a></td>
-                    <td th:text="${school.getLocation()}">院校所在地</td>
-                    <td th:text="${school.getBelonged()}">教育行政主管部门</td>
-                    <td th:text="${school.getType()}">院校类型</td>
-                    <td th:text="${school.getEducation_level()}">学历层次</td>
-                    <td th:text="${school.getYiliudaxue()}">一流大学建设高校</td>
-                    <td th:text="${school.getYiliuxueke()}">一流学科建设高校</td>
-                    <td th:text="${school.getGraduate_school()}">研究生院</td>
-                    <td th:text="${school.getComprehensive()}">综合满意度</td>
-                    <td th:text="${school.getEnvironment()}">院校环境满意度</td>
-                    <td th:text="${school.getLife()}">生活满意度</td>
-                    <td ><a th:href="@{/GetSchoolInfo(name=${school.getSchname()})}">
-                        <input type="button" value="详情"/>
-                    </a>
-                    </td>
-                </tr>
-                </tbody>
-                <tr>
-                    <td colspan="8">
-                        <div class="pagelist">
-                            <p>当前<span th:text="${schoolInfos.getNumber()} + 1"></span>页,总<span th:text="${schoolInfos.getTotalPages()}"></span>页
-                                共<span th:text="${schoolInfos.getTotalElements()}"></span>条记录
-                                <a th:href="@{/schoolInfo}">首页</a>`
-                                <a th:href="@{/schoolInfo(pageNum = ${schoolInfos.hasPrevious()} ? ${schoolInfos.getNumber() } : 1)}">上一页</a>
-                                <a th:href="@{/schoolInfo(pageNum = ${schoolInfos.hasNext()} ? ${schoolInfos.getNumber()} + 2 : ${schoolInfos.getTotalPages()})}">下一页</a>
-                                <a th:href="@{/schoolInfo(pageNum = ${schoolInfos.getTotalPages()})}">尾页</a></p>
-                        </div>
-                    </td>
-                </tr>
-            </table>
+            <select name="postdb[yx_localprovince]" id="location" class="gfxdx_shengfen index_input">
+                <option value="北京">选择省份</option>
+                <option th:each="loca :${location}"
+                        th:text="${loca}" th:value="${loca}" ></option>
+            </select>
+            <select name="postdb[yx_localprovince]" id="type" class="gfxdx_shengfen index_input">
+                <option value="综合">选择类型</option>
+                <option th:each="leixin :${type}"
+                        th:text="${leixin}" th:value="${leixin}" ></option>
+            </select>
+            <select name="postdb[yx_localprovince]" id="level" class="gfxdx_shengfen index_input">
+                <option value="本科">选择层次</option>
+                <option th:each="pc :${level}"
+                        th:text="${pc}" th:value="${pc}" ></option>
+            </select>
+            <div class="gfxdx_btn cursor" id="searchBtn">查询<i class="fa fa-hand-o-up"></i></div>
+            <script>
+                $("#searchBtn").click(function () {
+                    window.location.href='/schoolInfo?location='+$("#location").val()+
+                        "&type="+$("#type").val()+"&level="+$("#level").val();
+                });
+            </script>
+
+            <div style="padding-top: 50px;">
+                <table width="100%" border="0" cellpadding="0" cellspacing="1" class="bgddd">
+                    <tbody>
+                    <tr align="center" class="tb_title">
+                        <th>序号</th>
+                        <th>院校名称</th>
+                        <th>院校所在地</th>
+                        <th>教育行政主管部门</th>
+                        <th>院校类型</th>
+                        <th>学历层次</th>
+                        <th>一流大学建设高校</th>
+                        <th>一流学科建设高校</th>
+                        <th>研究生院</th>
+                        <th>综合满意度</th>
+                        <th>院校环境满意度</th>
+                        <th>生活满意度</th>
+                        <th></th>
+                    </tr>
+                    <tr th:each="school : ${schoolInfos}" align="center" class="tb_content" id="a12654">
+                        <td th:text="${schoolStat.index+1}">序号</td>
+                        <td  ><a th:text="${school.getSchname()}"
+                                 th:href="@{/GetSchoolInfo(name=${school.getSchname()})}"></a></td>
+                        <td th:text="${school.getLocation()}">院校所在地</td>
+                        <td th:text="${school.getBelonged()}">教育行政主管部门</td>
+                        <td th:text="${school.getType()}">院校类型</td>
+                        <td th:text="${school.getEducation_level()}">学历层次</td>
+                        <td th:text="${school.getYiliudaxue()}">一流大学建设高校</td>
+                        <td th:text="${school.getYiliuxueke()}">一流学科建设高校</td>
+                        <td th:text="${school.getGraduate_school()}">研究生院</td>
+                        <td th:text="${school.getComprehensive()}">综合满意度</td>
+                        <td th:text="${school.getEnvironment()}">院校环境满意度</td>
+                        <td th:text="${school.getLife()}">生活满意度</td>
+                        <td ><a th:href="@{/GetSchoolInfo(name=${school.getSchname()})}">
+                            <input type="button" value="详情"/>
+                        </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tr>
+                        <td colspan="8">
+                            <div class="pagelist">
+                                <p>当前<span th:text="${schoolInfos.getNumber()} + 1"></span>页,总<span th:text="${schoolInfos.getTotalPages()}"></span>页
+                                    共<span th:text="${schoolInfos.getTotalElements()}"></span>条记录
+                                    <a th:href="@{/schoolInfo}">首页</a>`
+                                    <a th:href="@{/schoolInfo(pageNum = ${schoolInfos.hasPrevious()} ? ${schoolInfos.getNumber() } : 1)}">上一页</a>
+                                    <a th:href="@{/schoolInfo(pageNum = ${schoolInfos.hasNext()} ? ${schoolInfos.getNumber()} + 2 : ${schoolInfos.getTotalPages()})}">下一页</a>
+                                    <a th:href="@{/schoolInfo(pageNum = ${schoolInfos.getTotalPages()})}">尾页</a></p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
         <script>
             $(document).ready(function() {
