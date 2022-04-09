@@ -27,16 +27,22 @@ public class SchoolInfo {
     String yiliuxueke;
     @Column
     String graduate_school;
-
     @Column
     String comprehensive;
-
     @Column
     String environment;
-
     @Column
     String life;
-//    @Transient
+    String jiuerproject;
+
+    public String getJiuerproject() {
+        return jiuerproject;
+    }
+
+    public void setJiuerproject(String jiuerproject) {
+        this.jiuerproject = jiuerproject;
+    }
+    //    @Transient
 //    private Integer uid;
 //
 //    public Integer getUid() {

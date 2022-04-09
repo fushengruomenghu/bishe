@@ -13,8 +13,6 @@ import java.util.List;
 public class CharacterServiceImpl implements CharacterService {
     @Autowired
     private CharacterDao characterDao;
-
-
     @Override
     public List<Character> findByGradeBetween(int start, int end, String location, String leibie) {
         return characterDao.findCharactersByGradeBetweenAndLocationAndLeibie(start, end, location, leibie);
@@ -22,13 +20,13 @@ public class CharacterServiceImpl implements CharacterService {
     public List<Character> findByCharacter(int start, int end, String location, String leibie,String province) {
         return characterDao.findCharacterByGradeBetweenAndLocationAndLeibie(start,end,location,leibie,province);
     }
-//    public List<CharacterAndSchoolInfo> findCharacterAndSchoolInfo(String start, String end, String location, String leibie){
-//        return characterDao.findCharacterAndSchoolInfo(start, end, location, leibie);
-//    }
     @Override
     public List<String> findLocation() {
         return characterDao.findDistinctLocation();
     }
     public void findAll(){
+    }
+    public List<Character> findByGradeBetweenAndLocationAndMajorname(int start, int end, String location, String major){
+        return characterDao.findCharactersByGradeBetweenAndLocationAndMajorname(start, end, location, major);
     }
 }

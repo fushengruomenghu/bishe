@@ -11,6 +11,8 @@ public class Users {
     Integer id;
     @Column
     String username;
+    @Column
+    String password;
     @Column(insertable = false,columnDefinition = "varchar default '0'")
     String sex;
     @Column
@@ -21,26 +23,53 @@ public class Users {
     String grade;
     @Column(insertable = false,columnDefinition = "varchar default '0'")
     String leibie;
-    @Column(insertable = false,columnDefinition = "varchar default '0'")
-    String pici;
     @Column
-    String hobby;
+    String major;
+    @Column
+    String usersrole;
+    @Column
+    String secret;
 
+    public String getUsersrole() {
+        return usersrole;
+    }
+
+    public void setUsersrole(String usersrole) {
+        this.usersrole = usersrole;
+    }
 
     public Users() {
 
     }
 
-    public Users(Integer id, String username, String sex, String phone, String location, String grade, String leibie, String pici, String hobby) {
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getSecret() {
+        return secret;
+    }
+
+    public void setSecret(String secret) {
+        this.secret = secret;
+    }
+
+    public Users(Integer id, String username, String password, String sex, String phone, String location, String grade, String leibie, String major, String usersrole, String secret) {
         this.id = id;
         this.username = username;
+        this.password = password;
         this.sex = sex;
         this.phone = phone;
         this.location = location;
         this.grade = grade;
         this.leibie = leibie;
-        this.pici = pici;
-        this.hobby = hobby;
+        this.major = major;
+        this.usersrole = usersrole;
+        this.secret = secret;
     }
 
     public Integer getId() {
@@ -55,12 +84,12 @@ public class Users {
         return username;
     }
 
-    public String getHobby() {
-        return hobby;
+    public String getMajor() {
+        return major;
     }
 
-    public void setHobby(String hobby) {
-        this.hobby = hobby;
+    public void setMajor(String major) {
+        this.major = major;
     }
 
     public void setUsername(String username) {
@@ -107,11 +136,4 @@ public class Users {
         this.leibie = leibie;
     }
 
-    public String getPici() {
-        return pici;
-    }
-
-    public void setPici(String pici) {
-        this.pici = pici;
-    }
 }

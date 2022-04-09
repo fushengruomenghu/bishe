@@ -61,20 +61,21 @@ public class ScorelineControllerImpl implements ScorelineController {
             @Override
             public Predicate toPredicate(Root<Scoreline> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
                 List<Predicate> predicates=new ArrayList<>();
-                if (province!=null) {
+                if (province!=null&&!province.equals("")) {
                     predicates.add(criteriaBuilder.equal(root.get("location"),province));
+                    model.addAttribute("prov",province);
                 }
-                if (leibie!=null) {
-
+                if (leibie!=null&&!leibie.equals("")) {
                     predicates.add(criteriaBuilder.equal(root.get("leibie"),leibie));
+                    model.addAttribute("lei",leibie);
                 }
-                if (pici!=null) {
-
+                if (pici!=null&&!pici.equals("")) {
                     predicates.add(criteriaBuilder.equal(root.get("pici"),pici));
+                    model.addAttribute("pic",pici);
                 }
-                if (year!=null) {
-
+                if (year!=null&&!year.equals("")) {
                     predicates.add(criteriaBuilder.equal(root.get("year"),year));
+                    model.addAttribute("yr",year);
                 }
                 return criteriaQuery.where(predicates.toArray(new Predicate[predicates.size()])).getRestriction();
             }

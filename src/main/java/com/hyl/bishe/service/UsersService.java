@@ -10,5 +10,5 @@ public interface UsersService {
     List<Users> findAllUsers();
 
     void updateUserById(Users users,Integer id);
-
+    List<Users> findall();
 }

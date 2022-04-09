@@ -57,10 +57,10 @@ public class ProfessionControllerImpl implements ProfessionController {
             @Override
             public Predicate toPredicate(Root<Profession> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
                 List<Predicate> predicates=new ArrayList<>();
-                if (disciplines!=null) {
+                if (disciplines!=null&&!disciplines.equals("null")) {
                     predicates.add(criteriaBuilder.equal(root.get("disciplines"),disciplines));
                 }
-                if (pro_category!=null) {
+                if (pro_category!=null&&!pro_category.equals("null")) {
 
                     predicates.add(criteriaBuilder.equal(root.get("pro_category"),pro_category));
                 }

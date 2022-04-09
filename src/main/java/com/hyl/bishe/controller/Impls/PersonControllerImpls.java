@@ -1,35 +1,31 @@
 package com.hyl.bishe.controller.Impls;
 
 import com.hyl.bishe.controller.PersonController;
-import com.hyl.bishe.entity.Person;
 import com.hyl.bishe.entity.Users;
 import com.hyl.bishe.service.impls.CharacterServiceImpl;
-import com.hyl.bishe.service.impls.PersonServiceImpls;
 import com.hyl.bishe.service.impls.ScorelineServiceImpl;
 import com.hyl.bishe.service.impls.UsersServiceImpl;
+import com.hyl.bishe.utils.MD5Utils;
 import com.hyl.bishe.utils.RandomValidateCodeUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Enumeration;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class PersonControllerImpls implements PersonController {
     private final static Logger logger = LoggerFactory.getLogger(PersonControllerImpls.class);
 
-    @Autowired
-    private PersonServiceImpls personServiceImpls;
     @Autowired
     private UsersServiceImpl usersService;
     @Autowired
@@ -44,34 +40,38 @@ public class PersonControllerImpls implements PersonController {
         return "register";
     }
 
-
-
-
     @RequestMapping("/doRegister")
-    public String doRegister(HttpServletRequest request) {
+    public String doRegister(HttpServletRequest request,Model model) {
         String password1 = request.getParameter("password1");
         String password2 = request.getParameter("password2");
         String phone = request.getParameter("phone");
+        String secret=request.getParameter("secret");
+        String shengfen=request.getParameter("shengfen");
 
-        List<Person> personList=personServiceImpls.findAllPerson();
-        Person person1=new Person();
+        List<Users> usersList=usersService.findAllUsers();
+        Users users=new Users();
         Boolean flag = false;
 
-        for (Person person : personList) {
-            if (person.getPhone().equals(phone)) {
-                flag = false;
-            } else {
-                flag = true;
+        if (usersList.size()==0) {
+            flag = true;
+        }else {
+            for (Users users1 : usersList) {
+                if (users1.getPhone().equals(phone)) {
+                    flag = false;
+                } else {
+                    flag = true;
+                }
             }
         }
         if (flag) {
             if (password1.equals(password2)) {
-                person1.setPhone(phone);
-                person1.setPassword(password1);
-                personServiceImpls.InsertPerson(person1);
-                Users user=new Users();
-                user.setPhone(person1.getPhone());
-                usersService.sava(user);
+                users.setPhone(phone);
+                users.setPassword(MD5Utils.inputPassToFormPass(password1));
+                users.setUsersrole(shengfen);
+
+                users.setSecret(secret);
+                usersService.sava(users);
+                model.addAttribute("registerMsg","注册成功");
                 System.out.println("注册成功");
                 return "login";
             } else {
@@ -80,6 +80,7 @@ public class PersonControllerImpls implements PersonController {
             }
         } else {
             System.out.println("手机号已存在");
+            System.out.println(usersList.toArray());
             return "register";
         }
     }
@@ -89,31 +90,31 @@ public class PersonControllerImpls implements PersonController {
     public String login() {
         return "login";
     }
-    @RequestMapping("/doLogin")
+    @RequestMapping(value = "/doLogin")
     public String doLogin(HttpServletRequest request, HttpSession session, Model model){
         String phone = request.getParameter("phone");
         String password = request.getParameter("password");
         String verifyInput=request.getParameter("verify_input");
         System.out.println(phone+"+++++++++++++++"+password);
-        Person person=personServiceImpls.findByPhoneAndPassword(phone,password);
+        Users users=usersService.findUsersByPhoneAndPassword(phone,MD5Utils.inputPassToFormPass(password));
         String random = (String) session.getAttribute("RANDOMVALIDATECODEKEY");
 
-        if (random.equals(verifyInput)) {
-            if (person != null) {
-                Users users=usersService.findUserByPhone(person.getPhone());
+        if (random.equalsIgnoreCase(verifyInput)) {
+            if (users != null) {
                 List<String> location= characterService.findLocation();
                 List<String> leibie= scorelineService.findleibie();
                 session.setAttribute("location",location);
                 session.setAttribute("leibie",leibie);
                 session.setAttribute("Users",users);
-                System.out.println("登陆成功");
+                session.setAttribute("Usersrole",users.getUsersrole());
+                model.addAttribute("loginMsg","登陆成功");
                 return "redirect:/schoolInfo";
             }else {
                 System.out.println("用户名或密码错误");
+                model.addAttribute("loginError","用户名或密码错误");
                 return "login";
             }
         }else {
-            System.out.println("验证码错误");
             return "login";
         }
     }
@@ -134,29 +135,31 @@ public class PersonControllerImpls implements PersonController {
         String password1 = request.getParameter("pw1");
         String password2 = request.getParameter("pw2");
         String phone = request.getParameter("phone");
-        Person person1=personServiceImpls.findByPhone(phone);
+        String secret=request.getParameter("secret");
 
-        if ( person1!=null) {
-            if (password1.equals(password2)) {
-                    personServiceImpls.updatepassword(password1,phone);
+        Users users=usersService.findUserByPhone(phone);
+
+        if ( users!=null) {
+            if (password1.equals(password2)&&secret.equals(users.getSecret())) {
+                    usersService.updatepassword(MD5Utils.inputPassToFormPass(password1),phone);
                     System.out.println("密码修改成功");
                     return "login";
             }else {
-                System.out.println("密码不一致");
+                System.out.println("密码不一致或密保错误");
                 return "register";
             }
         } else {
-            System.out.println("手机号已存在");
+            System.out.println("手机号不存在");
             return "register";
         }
     }
 
-    @RequestMapping("/details")
-    public String GetAll(Map<String,Object> map){
-       List<Person> personList= personServiceImpls.findAllPerson();
-       map.put("personList",personList);
-        return "schooldetails";
-    }
+//    @RequestMapping("/details")
+//    public String GetAll(Map<String,Object> map){
+//       List<Person> personList= personServiceImpls.findAllPerson();
+//       map.put("personList",personList);
+//        return "schooldetails";
+//    }
 
     /**
      * 退出
@@ -166,6 +169,10 @@ public class PersonControllerImpls implements PersonController {
     @RequestMapping("/logout")
     public String LogOut(HttpSession session){
         session.removeAttribute("Users");
+        Enumeration em = session.getAttributeNames();
+        while (em.hasMoreElements()) {
+            session.removeAttribute(em.nextElement().toString());
+        }
         return "redirect:/";
     }
 

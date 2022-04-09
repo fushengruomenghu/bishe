@@ -2,6 +2,7 @@ package com.hyl.bishe.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.Data;
 
 import javax.persistence.*;
 
@@ -10,32 +11,49 @@ public class Character {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
     @Column
     private String grade;
-
     @Column
     private String province;
-
     @Column
     private String location;
-
     @Column
     private String leibie;
-
     @Column
     private String batch;
-
     @Column
     private String college;
-
     @Column
     private String majorname;
-
-
     private Integer sid;
-
     private Integer pid;
+    private String cpoint;
+    private String epoint;
+    private String lpoint;
+
+    public String getCpoint() {
+        return cpoint;
+    }
+
+    public void setCpoint(String cpoint) {
+        this.cpoint = cpoint;
+    }
+
+    public String getEpoint() {
+        return epoint;
+    }
+
+    public void setEpoint(String epoint) {
+        this.epoint = epoint;
+    }
+
+    public String getLpoint() {
+        return lpoint;
+    }
+
+    public void setLpoint(String lpoint) {
+        this.lpoint = lpoint;
+    }
 
     public Integer getSid() {
         return sid;

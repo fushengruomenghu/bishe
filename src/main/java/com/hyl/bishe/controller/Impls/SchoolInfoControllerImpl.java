@@ -46,28 +46,28 @@ public class SchoolInfoControllerImpl implements SchoolInfoController {
         String location=request.getParameter("location");
         String education_level=request.getParameter("level");
         String type=request.getParameter("type");
+
+
         if (pageNum == null) {
             pageNum=1;
         }
-        Sort sort=Sort.by(Sort.Direction.ASC,"location");
+        Sort sort=Sort.by(Sort.Direction.ASC,"id");
         Pageable pageable=PageRequest.of(pageNum-1,25,sort);
-        Specification<SchoolInfo> specification=new Specification<SchoolInfo>() {
-            @Override
-            public Predicate toPredicate(Root<SchoolInfo> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
-                List<Predicate> predicates=new ArrayList<>();
-                if (location!=null) {
-                    predicates.add(criteriaBuilder.equal(root.get("location"),location));
-                }
-                if (education_level!=null) {
-
-                    predicates.add(criteriaBuilder.equal(root.get("education_level"),education_level));
-                }
-                if (type!=null) {
-
-                    predicates.add(criteriaBuilder.equal(root.get("type"),type));
-                }
-                return criteriaQuery.where(predicates.toArray(new Predicate[predicates.size()])).getRestriction();
+        Specification<SchoolInfo> specification= (root, criteriaQuery, criteriaBuilder) -> {
+            List<Predicate> predicates=new ArrayList<>();
+            if (location!=null&&!location.equals("")) {
+                predicates.add(criteriaBuilder.equal(root.get("location"),location));
+                model.addAttribute("loc",location);
             }
+            if (education_level!=null&&!education_level.equals("")) {
+                predicates.add(criteriaBuilder.equal(root.get("education_level"),education_level));
+                model.addAttribute("lev",education_level);
+            }
+            if (type!=null&&!type.equals("")) {
+                predicates.add(criteriaBuilder.equal(root.get("type"),type));
+                model.addAttribute("ty",type);
+            }
+            return criteriaQuery.where(predicates.toArray(new Predicate[predicates.size()])).getRestriction();
         };
 
         Page<SchoolInfo> list = schoolInfoService.findAll(specification,pageable);

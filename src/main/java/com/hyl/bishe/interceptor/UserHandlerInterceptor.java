@@ -6,19 +6,18 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class LoginHandlerInterceptor implements HandlerInterceptor {
+public class UserHandlerInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
 
     }
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        Object user=request.getSession().getAttribute("Users");
-        if (user != null) {
+        Object Usersrole=request.getSession().getAttribute("Usersrole");
+        if (Usersrole.toString().equals("0")) {
             return true;
         }else {
-            request.setAttribute("login_error","请登录");
-            request.getRequestDispatcher("/").forward(request,response);
+            request.getRequestDispatcher("/schoolInfo").forward(request,response);
             return false;
         }
     }

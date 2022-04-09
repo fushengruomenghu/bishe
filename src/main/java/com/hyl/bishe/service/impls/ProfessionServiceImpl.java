@@ -32,7 +32,19 @@ public class ProfessionServiceImpl implements ProfessionService {
         return professionDao.findAll();
     }
 
+    public String findMbtiByName(String name){
+        return professionDao.findMbtiByName(name);
+    }
+    public   String findHollandByName(String name){
+        return professionDao.findHollandByName(name);
+    }
 
+    public List<Profession> findByLike(String mbti,String holland){
+        return professionDao.findByLike(mbti,holland);
+    }
+    public List<Profession> findByLike(String mbti){
+        return professionDao.findByLike(mbti);
+    }
     @Override
     public List<String> findMenglei(String menglei) {
         return professionDao.findDistinctDisciplines(menglei);
@@ -41,9 +53,8 @@ public class ProfessionServiceImpl implements ProfessionService {
     public Profession findbyName(String name){
         return professionDao.findProfessionByProname(name);
     }
-
-   public List<String> findProNameByDegreeCategory(String str1,String str2,String str3){
-        return professionDao.findProNameByDegreeCategory(str1,str2,str3);
+    public String findMbtiById(Integer id){
+        return professionDao.findMbtiByLike(id);
     }
     
 }
